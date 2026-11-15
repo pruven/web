@@ -18,6 +18,12 @@ for (const width of [1440, 768, 390]) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveAccessibleName(
       'Software in motion.',
     );
+    const heroBounds = await page.locator('.hero').boundingBox();
+    const visualBounds = await page.locator('.hero-visual').boundingBox();
+    expect(visualBounds?.width).toBe(heroBounds?.width);
+    expect(visualBounds?.height).toBe(heroBounds?.height);
+    expect(visualBounds?.x).toBe(heroBounds?.x);
+    expect(visualBounds?.y).toBe(heroBounds?.y);
     for (const id of ['studio', 'services', 'work', 'process', 'contact'])
       await expect(page.locator(`#${id}`)).toBeAttached();
     expect(
@@ -101,21 +107,25 @@ test('form validates and supports real endpoint success and failure', async ({
   expect(payload.email).toBe('alex@example.com');
 });
 
-test('reduced motion keeps all content visible and freezes canvas', async ({
+test('reduced motion keeps all content visible and freezes visuals', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(300);
-  const canvas = page.locator('.hero-art');
-  const before = await canvas.evaluate((el: HTMLCanvasElement) =>
-    el.toDataURL(),
+  await expect(page.locator('[data-gradient-ascii]')).toHaveAttribute(
+    'data-ascii-status',
+    'ready',
   );
   await page.waitForTimeout(300);
-  expect(await canvas.evaluate((el: HTMLCanvasElement) => el.toDataURL())).toBe(
-    before,
-  );
+  const visual = page.locator('.hero-visual');
+  const before = await visual.screenshot();
+  await page.waitForTimeout(300);
+  expect((await visual.screenshot()).equals(before)).toBe(true);
+  for (const scene of await page.locator('[data-visual-motion]').all()) {
+    await expect(scene).toHaveAttribute('data-motion-state', 'still');
+    await expect(scene.getByRole('button')).toBeHidden();
+  }
   for (const el of await page.locator('.word,.reveal').all())
     await expect(el).toHaveCSS('opacity', '1');
 });
@@ -154,4 +164,130 @@ test('copies the documented Bun installation commands', async ({ page }) => {
   expect(
     await page.evaluate(() => (window as Window & { copied?: string }).copied),
   ).toBe('bun add --dev @pruven/zeke\nbun --bun zeke install');
+});
+
+for (const width of [1440, 390]) {
+  test(`visuals animate and pause at ${width}px`, async ({ page }) => {
+    test.setTimeout(90_000); // Full-hero WebGL screenshots use Chromium's CPU renderer in CI.
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator('[data-gradient-ascii]')).toHaveAttribute(
+      'data-ascii-status',
+      'ready',
+    );
+    const scenes = page.locator('[data-visual-motion]');
+    await expect(scenes).toHaveCount(5);
+    for (const scene of await scenes.all()) {
+      await scene.evaluate((el) =>
+        window.scrollTo({
+          top: el.getBoundingClientRect().top + scrollY - 100,
+          behavior: 'instant',
+        }),
+      );
+      await expect(scene).toHaveAttribute('data-motion-state', 'playing');
+      const before = await scene.screenshot({ animations: 'allow' });
+      await page.waitForTimeout(800);
+      expect(
+        (await scene.screenshot({ animations: 'allow' })).equals(before),
+      ).toBe(false);
+      const button = scene.getByRole('button');
+      await button.click();
+      await expect(button).toHaveAttribute('aria-pressed', 'true');
+      await page.waitForTimeout(180);
+      const frozen = await scene.screenshot({ animations: 'allow' });
+      await page.waitForTimeout(200);
+      expect(
+        (await scene.screenshot({ animations: 'allow' })).equals(frozen),
+      ).toBe(true);
+      await button.click();
+      await expect(button).toHaveAttribute('aria-pressed', 'false');
+    }
+  });
+}
+
+test('ASCII hero has a static fallback when WebGL is unavailable', async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+      value: () => null,
+    }),
+  );
+  await page.goto('/');
+  await expect(page.locator('canvas')).toHaveCount(1);
+  await expect(page.locator('[data-gradient-ascii]')).toHaveAttribute(
+    'data-ascii-status',
+    'fallback',
+  );
+  await expect(page.locator('.gradient-ascii-fallback')).toBeVisible();
+  await expect(page.locator('[data-dither]')).toHaveCount(0);
+  await expect(page.locator('[data-visual-motion]>svg')).toHaveCount(4);
+  await expect(page.locator('.footer-wordmark text')).toHaveText('pruven');
+});
+
+test('ASCII responds to pointer input and recovers from context loss', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const names = new WeakMap<WebGLUniformLocation, string>();
+    const prototype = WebGL2RenderingContext.prototype;
+    const getLocation = prototype.getUniformLocation;
+    const setVector = prototype.uniform4fv;
+    prototype.getUniformLocation = function (program, name) {
+      const location = getLocation.call(this, program, name);
+      if (location) names.set(location, name);
+      return location;
+    };
+    prototype.uniform4fv = function (location, values, ...rest) {
+      const name = location ? names.get(location) : '';
+      const vector = Array.from(values);
+      const state = window as Window & {
+        asciiPointer?: boolean;
+        asciiClick?: boolean;
+      };
+      if (name === 'uTrail' && Number(vector[2]) > 0) state.asciiPointer = true;
+      if (name === 'uClicks' && Number(vector[3]) > 0) state.asciiClick = true;
+      return setVector.call(this, location, values, ...rest);
+    };
+  });
+  await page.goto('/');
+  const effect = page.locator('[data-gradient-ascii]');
+  await expect(effect).toHaveAttribute('data-ascii-status', 'ready');
+  const bounds = await effect.boundingBox();
+  if (!bounds) throw new Error('ASCII hero has no dimensions');
+  await page.mouse.move(
+    bounds.x + bounds.width / 2,
+    bounds.y + bounds.height / 2,
+  );
+  await page.mouse.move(
+    bounds.x + bounds.width / 2 + 30,
+    bounds.y + bounds.height / 2,
+    { steps: 5 },
+  );
+  await page.mouse.click(
+    bounds.x + bounds.width / 2,
+    bounds.y + bounds.height / 2,
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const state = window as Window & {
+          asciiPointer?: boolean;
+          asciiClick?: boolean;
+        };
+        return !!state.asciiPointer && !!state.asciiClick;
+      }),
+    )
+    .toBe(true);
+  await effect.locator('canvas').evaluate((canvas) => {
+    (canvas as HTMLCanvasElement)
+      .getContext('webgl2')
+      ?.getExtension('WEBGL_lose_context')
+      ?.loseContext();
+  });
+  await expect(effect).toHaveAttribute('data-ascii-status', 'fallback');
+  await expect(effect.locator('.gradient-ascii-fallback')).toBeVisible();
+  await expect(page.locator('#hero-visual button')).toBeHidden();
 });

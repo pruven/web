@@ -27,7 +27,7 @@ export const services = [
     tags: ['Data engineering', 'Dashboards', 'LLM features', 'Forecasting'],
     art: 'data',
   },
-];
+] as const;
 export const processSteps = [
   {
     name: 'Discover',

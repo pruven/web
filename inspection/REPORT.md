@@ -1,3 +1,11 @@
+# Current visual treatment
+
+The hero uses the user-supplied GradientASCII renderer as a full-section background, fading into the white page. Services use animated SVG illustrations and the footer uses a solid wordmark. See [visuals/REPORT.md](visuals/REPORT.md) for the current implementation and checks. Earlier dither notes below are historical.
+
+# Dither redesign
+
+The graphite and blue motion system is documented in [dither/REPORT.md](dither/REPORT.md), with current screenshots, animation tests, and a recorded preview.
+
 # Company positioning
 
 Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. The hero, studio, services, process, contact, footer, metadata, and Open Graph image reflect both sides of the company. Zeke remains its only current product.

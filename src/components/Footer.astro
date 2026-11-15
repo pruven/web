@@ -51,7 +51,11 @@ import { ArrowUp } from '@lucide/astro';
       </div>
     </div>
     <div class="footer-art">
-      <canvas data-art="wordmark" aria-hidden="true"></canvas>
+      <svg class="footer-wordmark" viewBox="0 0 1200 400" aria-hidden="true">
+        <text x="0" y="300" textLength="1195" lengthAdjust="spacingAndGlyphs">
+          pruven
+        </text>
+      </svg>
     </div>
     <div class="footer-legal mono">
       <p>© {new Date().getFullYear()} Pruven</p>

@@ -1,0 +1,27 @@
+---
+import type { GradientASCIIOptions } from '../vendor/gradient-ascii';
+interface Props extends GradientASCIIOptions {
+  class?: string;
+}
+const { class: className, ...options } = Astro.props;
+const characters = ' =+xX0S8#@';
+const fallback = Array.from({ length: 18 }, (_, y) =>
+  Array.from({ length: 60 }, (_, x) => {
+    const energy = Math.max(0, 1 - Math.hypot((x - 30) / 40, (y - 4) / 17));
+    return ((x * 17 + y * 31) % 13) / 13 > energy
+      ? ' '
+      : characters[Math.floor(energy * (characters.length - 1))];
+  }).join(''),
+).join('\n');
+---
+
+<div
+  class:list={['gradient-ascii-container', className]}
+  data-gradient-ascii
+  data-options={JSON.stringify(options)}
+>
+  <div class="gradient-ascii-fallback" aria-hidden="true">
+    <pre>{fallback}</pre>
+  </div>
+  <canvas class="gradient-ascii-canvas" aria-hidden="true"></canvas>
+</div>

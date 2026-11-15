@@ -1,0 +1,27 @@
+---
+import VisualFrame from './VisualFrame.astro';
+import GradientASCII from './GradientASCII.astro';
+---
+
+<VisualFrame
+  id="hero-visual"
+  label="ASCII gradient animation"
+  kind="hero"
+  class="hero-visual hero-ascii"
+>
+  <GradientASCII
+    colors={['#1e3fd8', '#f6f8ff', '#a5d8ff', '#38bdf8']}
+    shape="horizon"
+    characters=" =+xX0S8#@"
+    cellSize={18}
+    density={0.8}
+    lightMode={true}
+    gradientOpacity={0.65}
+    glyphOpacity={0.85}
+    glow={0.12}
+    grain={0.025}
+    flicker={0.12}
+    fontFamily={'"DM Mono", monospace'}
+    dpr={1}
+  />
+</VisualFrame>

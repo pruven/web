@@ -1,0 +1,224 @@
+---
+import VisualFrame from './VisualFrame.astro';
+interface Props {
+  kind: string;
+  id: string;
+  label: string;
+}
+const { kind, id, label } = Astro.props;
+---
+
+<VisualFrame
+  id={id}
+  label={label}
+  class={`service-illustration visual-${kind}`}
+>
+  <svg viewBox="0 0 320 208" fill="none" aria-hidden="true">
+    {kind === 'orbit' && (
+      <>
+        <rect
+          x="43"
+          y="34"
+          width="234"
+          height="146"
+          rx="10"
+          fill="white"
+          stroke="#d7dfe9"
+        />
+        <path d="M43 61H277" stroke="#e5eaf1" />
+        <rect x="57" y="46" width="48" height="4" rx="2" fill="#d5dde8" />
+        <rect x="58" y="77" width="64" height="87" rx="5" fill="#edf2fa" />
+        <rect x="138" y="79" width="111" height="7" rx="3.5" fill="#becbde" />
+        <rect x="138" y="94" width="78" height="5" rx="2.5" fill="#e1e7ef" />
+        <g class="design-selection">
+          <rect
+            x="136"
+            y="112"
+            width="113"
+            height="51"
+            rx="5"
+            fill="#f0f4ff"
+            stroke="#6c8de6"
+          />
+          <rect x="147" y="123" width="54" height="5" rx="2.5" fill="#9bb0e1" />
+          <rect x="147" y="135" width="89" height="4" rx="2" fill="#d5dff3" />
+          <path
+            d="M131 107H142M131 107V118M254 107H243M254 107V118M131 168H142M131 168V157M254 168H243M254 168V157"
+            stroke="#315efb"
+            stroke-width="2"
+          />
+        </g>
+        <path
+          class="design-cursor"
+          d="M237 147L241 166L247 159L256 160L237 147Z"
+          fill="#315efb"
+          stroke="white"
+          stroke-width="2"
+        />
+      </>
+    )}
+    {kind === 'code' && (
+      <>
+        <rect x="35" y="33" width="250" height="148" rx="10" fill="#172337" />
+        <path d="M35 60H285" stroke="#344157" />
+        <rect x="50" y="46" width="59" height="4" rx="2" fill="#6c7d99" />
+        <text
+          x="53"
+          y="85"
+          fill="#8faeff"
+          font-size="12"
+          font-family="DM Mono,monospace"
+        >
+          function build() {'{'}
+        </text>
+        <text
+          x="64"
+          y="106"
+          fill="#c8d4e8"
+          font-size="12"
+          font-family="DM Mono,monospace"
+        >
+          const idea = explore();
+        </text>
+        <text
+          x="64"
+          y="128"
+          fill="#c8d4e8"
+          font-size="12"
+          font-family="DM Mono,monospace"
+        >
+          return ship(idea);
+        </text>
+        <text
+          x="53"
+          y="150"
+          fill="#8faeff"
+          font-size="12"
+          font-family="DM Mono,monospace"
+        >
+          {'}'}
+        </text>
+        <path
+          class="code-progress"
+          d="M64 136H210"
+          stroke="#7d9fff"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <rect
+          class="code-caret"
+          x="218"
+          y="119"
+          width="2"
+          height="12"
+          fill="#9eb7ff"
+        />
+      </>
+    )}
+    {kind === 'cloud' && (
+      <>
+        <path
+          d="M160 83V113H79V140M160 113H241V140"
+          stroke="#cbd7e6"
+          stroke-width="2"
+        />
+        <path
+          class="cloud-packet cloud-packet-left"
+          d="M160 83V113H79V140"
+          stroke="#315efb"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          class="cloud-packet cloud-packet-right"
+          d="M160 83V113H241V140"
+          stroke="#315efb"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <rect
+          x="118"
+          y="35"
+          width="84"
+          height="51"
+          rx="8"
+          fill="white"
+          stroke="#d0dbe9"
+        />
+        <path
+          d="M133 51H186M133 63H170"
+          stroke="#b7c7dd"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <rect
+          class="cloud-node"
+          x="43"
+          y="140"
+          width="72"
+          height="37"
+          rx="7"
+          fill="white"
+          stroke="#d0dbe9"
+        />
+        <path
+          d="M57 158H100"
+          stroke="#b7c7dd"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <rect
+          class="cloud-node cloud-node-second"
+          x="205"
+          y="140"
+          width="72"
+          height="37"
+          rx="7"
+          fill="white"
+          stroke="#d0dbe9"
+        />
+        <path
+          d="M219 158H262"
+          stroke="#b7c7dd"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </>
+    )}
+    {kind === 'data' && (
+      <>
+        <rect
+          x="43"
+          y="33"
+          width="234"
+          height="148"
+          rx="10"
+          fill="white"
+          stroke="#d7dfe9"
+        />
+        <rect x="59" y="49" width="63" height="5" rx="2.5" fill="#bdcadc" />
+        <path d="M61 83H259M61 111H259M61 139H259" stroke="#edf1f6" />
+        {[42, 66, 50, 83, 70, 104].map((h, i) => (
+          <rect
+            class="chart-bar"
+            style={`--bar:${i}`}
+            x={70 + i * 30}
+            y={164 - h}
+            width="16"
+            height={h}
+            rx="3"
+            fill={i === 5 ? '#315efb' : '#c8d7ef'}
+          />
+        ))}
+        <path
+          class="chart-trend"
+          d="M65 127L101 110L135 117L170 91L205 96L252 64"
+          stroke="#6c8fe1"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </>
+    )}
+  </svg>
+</VisualFrame>

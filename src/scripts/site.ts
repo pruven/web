@@ -1,7 +1,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate } from 'motion';
-import { initArt } from './art';
+import { initVisuals } from './visuals';
+import { initGradientASCII } from './gradient-ascii';
 import { product } from '../data/product';
 
 document
@@ -217,4 +218,5 @@ if (form) {
     }
   });
 }
-initArt();
+initVisuals();
+initGradientASCII();

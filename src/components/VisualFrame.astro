@@ -1,0 +1,31 @@
+---
+import { Pause, Play } from '@lucide/astro';
+interface Props {
+  id: string;
+  label: string;
+  class?: string;
+  kind?: string;
+}
+const { id, label, class: className, kind = 'service' } = Astro.props;
+---
+
+<div
+  id={id}
+  class:list={['visual-motion', className]}
+  data-visual-motion={kind}
+  data-motion-state="still"
+>
+  <slot />
+  <button
+    class="motion-toggle"
+    type="button"
+    data-visual-pause
+    aria-label={`Pause ${label}`}
+    aria-controls={id}
+    aria-pressed="false"
+    hidden
+  >
+    <Pause size={14} class="motion-pause-icon" />
+    <Play size={14} class="motion-play-icon" />
+  </button>
+</div>
