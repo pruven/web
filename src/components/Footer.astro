@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+import { ArrowUp } from '@lucide/astro';
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <Logo />
+        <p>
+          Independent software studio designing and engineering digital products
+          since 2016.
+        </p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="mono">Sitemap</p>
+        <ul>
+          {['Work', 'Services', 'Process', 'Studio', 'Contact'].map((link) => (
+            <li>
+              <a
+                href={
+                  link === 'Contact' ? '/contact' : `/#${link.toLowerCase()}`
+                }
+              >
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div>
+        <p class="mono">Studio</p>
+        <address>
+          Via Tortona 31
+          <br />
+          20144 Milano, Italy
+        </address>
+      </div>
+      <div>
+        <p class="mono">Say hello</p>
+        <ul>
+          <li>
+            <a href="mailto:hello@pruven.studio">hello@pruven.studio</a>
+          </li>
+          <li>
+            <a href="tel:+390287341120">+39 02 8734 1120</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-art">
+      <canvas data-art="wordmark" aria-hidden="true"></canvas>
+    </div>
+    <div class="footer-legal mono">
+      <p>© {new Date().getFullYear()} Pruven Studio S.r.l.</p>
+      <p>Designed and built in Milano</p>
+      <a href="/#top">
+        Back to top <ArrowUp size={14} />
+      </a>
+    </div>
+  </div>
+</footer>

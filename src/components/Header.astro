@@ -1,0 +1,61 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import { Menu, X } from '@lucide/astro';
+const links = ['Work', 'Services', 'Process', 'Studio'];
+---
+
+<a href="#main" class="skip-link">
+  Skip to content
+</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/#top" aria-label="Pruven home">
+      <Logo />
+    </a>
+    <nav class="desktop-nav" aria-label="Main">
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a href={`/#${link.toLowerCase()}`}>{link}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <Button href="/contact" small class="header-cta">
+      Start a project
+    </Button>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <Menu size={20} class="menu-icon" />
+      <X size={20} class="close-icon" />
+    </button>
+  </div>
+  <div id="mobile-menu" hidden>
+    <div class="wrap mobile-inner">
+      <nav aria-label="Mobile">
+        <ul>
+          {links.map((link, i) => (
+            <li>
+              <a href={`/#${link.toLowerCase()}`}>
+                {link}
+                <span class="mono">0{i + 1}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="mobile-bottom">
+        <Button href="/contact">Start a project</Button>
+        <a class="mono" href="mailto:hello@pruven.studio">
+          hello@pruven.studio
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

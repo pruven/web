@@ -1,0 +1,58 @@
+---
+import SectionLabel from './SectionLabel.astro';
+const stats = [
+  [
+    'Products shipped',
+    '120',
+    '+',
+    'From first versions to platforms serving millions.',
+  ],
+  [
+    'Years building',
+    '9',
+    '',
+    'Founded in Milano in 2016, independent ever since.',
+  ],
+  [
+    'Specialists',
+    '40',
+    '',
+    'Engineers, designers and data people, all senior.',
+  ],
+  [
+    'Clients who return',
+    '94',
+    '%',
+    'Most partnerships run for three years or more.',
+  ],
+];
+---
+
+<section id="studio" class="section studio">
+  <div class="wrap section-pad">
+    <div class="studio-intro">
+      <SectionLabel number="01" text="The studio" />
+      <p class="studio-statement reveal">
+        We are forty engineers, designers and data specialists building calm,
+        dependable software for ambitious companies.{' '}
+        <span>
+          Small senior teams, weekly releases, and we stay long after launch.
+        </span>
+      </p>
+    </div>
+    <ul class="stats">
+      {stats.map(([label, n, suffix, text]) => (
+        <li>
+          <div class="reveal">
+            <p class="mono">{label}</p>
+            <p class="stat-number">
+              <span data-count={n}>{n}</span>
+              {suffix}
+            </p>
+            <p class="stat-description">{text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

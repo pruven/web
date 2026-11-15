@@ -1,0 +1,304 @@
+{
+ "page": "dist/index.html",
+ "partial": false,
+ "results": [
+  {
+   "w": 1440,
+   "rows": [
+    {
+     "name": "host CPU load (before/after)",
+     "value": "9/3 %",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "total transfer",
+     "value": "469.9 KiB",
+     "verdict": "PASS",
+     "note": "html 7K  css 6.2K  js 71.4K  font 28.6K  img 349.3K  other 7.4K"
+    },
+    {
+     "name": "requests",
+     "value": 12,
+     "verdict": "PASS",
+     "note": "6 by load"
+    },
+    {
+     "name": "images bytes",
+     "value": "349.3 KiB",
+     "verdict": "PASS",
+     "note": "5 files"
+    },
+    {
+     "name": "largest image",
+     "value": "150.8 KiB",
+     "verdict": "PASS",
+     "note": "_astro/polaris.DSkjCBBL_yNYD.webp"
+    },
+    {
+     "name": "JS parsed",
+     "value": "189.5 KiB",
+     "verdict": "PASS",
+     "note": "1 files, 71.4K gz"
+    },
+    {
+     "name": "CSS",
+     "value": "6.2 KiB",
+     "verdict": "PASS",
+     "note": "1 files"
+    },
+    {
+     "name": "font families",
+     "value": 2,
+     "verdict": "PASS",
+     "note": "Host Grotesk Variable, DM Mono"
+    },
+    {
+     "name": "font files",
+     "value": 2,
+     "verdict": "PASS",
+     "note": "28.6K"
+    },
+    {
+     "name": "font bytes",
+     "value": "28.6 KiB",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "images without width+height",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "below-fold images not lazy",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "oversized images (natural > 2.2x shown)",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL live at load",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL live at bottom",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL peak live",
+     "value": 0,
+     "verdict": "PASS",
+     "note": "0 contexts made in all"
+    },
+    {
+     "name": "long tasks",
+     "value": 2,
+     "verdict": "PASS",
+     "note": "runs 1, , max 111ms"
+    },
+    {
+     "name": "blocking time",
+     "value": "71 ms",
+     "verdict": "PASS",
+     "note": "runs 1,  ms; at load 71ms"
+    },
+    {
+     "name": "FCP (CPU, relative)",
+     "value": "128 ms",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "LCP (CPU, relative)",
+     "value": "128 ms",
+     "verdict": "PASS",
+     "note": "span.word"
+    },
+    {
+     "name": "layout shift",
+     "value": "0.003",
+     "verdict": "PASS",
+     "note": "at load 0.000"
+    },
+    {
+     "name": "modules loaded, never mounted",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "broken requests",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "page height",
+     "value": "9.9 screens",
+     "verdict": "PASS",
+     "note": "DOM 627 nodes"
+    }
+   ]
+  },
+  {
+   "w": 390,
+   "rows": [
+    {
+     "name": "host CPU load (before/after)",
+     "value": "9/3 %",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "total transfer",
+     "value": "185.6 KiB",
+     "verdict": "PASS",
+     "note": "html 7K  css 6.2K  js 71.4K  font 28.6K  img 65.4K  other 7K"
+    },
+    {
+     "name": "requests",
+     "value": 11,
+     "verdict": "PASS",
+     "note": "5 by load"
+    },
+    {
+     "name": "images bytes",
+     "value": "65.4 KiB",
+     "verdict": "PASS",
+     "note": "5 files"
+    },
+    {
+     "name": "largest image",
+     "value": "18.5 KiB",
+     "verdict": "PASS",
+     "note": "_astro/polaris.DSkjCBBL_2qi3PF.webp"
+    },
+    {
+     "name": "JS parsed",
+     "value": "189.5 KiB",
+     "verdict": "PASS",
+     "note": "1 files, 71.4K gz"
+    },
+    {
+     "name": "CSS",
+     "value": "6.2 KiB",
+     "verdict": "PASS",
+     "note": "1 files"
+    },
+    {
+     "name": "font families",
+     "value": 2,
+     "verdict": "PASS",
+     "note": "Host Grotesk Variable, DM Mono"
+    },
+    {
+     "name": "font files",
+     "value": 2,
+     "verdict": "PASS",
+     "note": "28.6K"
+    },
+    {
+     "name": "font bytes",
+     "value": "28.6 KiB",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "images without width+height",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "below-fold images not lazy",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "oversized images (natural > 2.2x shown)",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL live at load",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL live at bottom",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "WebGL peak live",
+     "value": 0,
+     "verdict": "PASS",
+     "note": "0 contexts made in all"
+    },
+    {
+     "name": "long tasks",
+     "value": 0,
+     "verdict": "PASS",
+     "note": "runs 1, , max 0ms"
+    },
+    {
+     "name": "blocking time",
+     "value": "0 ms",
+     "verdict": "PASS",
+     "note": "runs 1,  ms; at load 0ms"
+    },
+    {
+     "name": "FCP (CPU, relative)",
+     "value": "48 ms",
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "LCP (CPU, relative)",
+     "value": "48 ms",
+     "verdict": "PASS",
+     "note": "p"
+    },
+    {
+     "name": "layout shift",
+     "value": "0.020",
+     "verdict": "PASS",
+     "note": "at load 0.000"
+    },
+    {
+     "name": "modules loaded, never mounted",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "broken requests",
+     "value": 0,
+     "verdict": "PASS",
+     "note": ""
+    },
+    {
+     "name": "page height",
+     "value": "15 screens",
+     "verdict": "PASS",
+     "note": "DOM 627 nodes"
+    }
+   ]
+  }
+ ]
+}

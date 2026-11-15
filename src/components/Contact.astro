@@ -1,0 +1,138 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import Heading from './Heading.astro';
+import { Mail, Phone, MapPin, ArrowUpRight } from '@lucide/astro';
+interface Props {
+  standalone?: boolean;
+}
+const { standalone = false } = Astro.props;
+const budgets = ['Under €25k', '€25k to €75k', '€75k to €150k', 'Over €150k'];
+---
+
+<section id="contact" class="section">
+  <div class="wrap section-pad contact-grid">
+    <div class="contact-copy">
+      <SectionLabel number="05" text="Contact" />
+      <Heading
+        contact
+        as={standalone ? 'h1' : 'h2'}
+        lines={['Let’s build', 'what’s next.']}
+      />
+      <p class="contact-description">
+        Tell us about your product, your timeline and what success looks like. A
+        partner replies within one business day.
+      </p>
+      <ul class="contact-details">
+        <li>
+          <a href="mailto:hello@pruven.studio">
+            <Mail size={20} />
+            <span>hello@pruven.studio</span>
+          </a>
+        </li>
+        <li>
+          <a href="tel:+390287341120">
+            <Phone size={20} />
+            <span>+39 02 8734 1120</span>
+          </a>
+        </li>
+        <li>
+          <MapPin size={20} />
+          <span>Via Tortona 31, 20144 Milano, Italy</span>
+        </li>
+      </ul>
+    </div>
+    <form
+      id="contact-form"
+      data-endpoint={import.meta.env.PUBLIC_CONTACT_ENDPOINT || ''}
+      novalidate
+      aria-describedby="contact-note"
+    >
+      <div class="form-pair">
+        <div class="field">
+          <label class="mono" for="contact-name">
+            Your name
+          </label>
+          <input
+            id="contact-name"
+            name="name"
+            required
+            autocomplete="name"
+            maxlength="120"
+            placeholder="Giulia Rossi"
+          />
+          <span class="field-error" id="name-error"></span>
+        </div>
+        <div class="field">
+          <label class="mono" for="contact-email">
+            Work email
+          </label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            maxlength="254"
+            placeholder="giulia@company.com"
+          />
+          <span class="field-error" id="email-error"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="mono" for="contact-company">
+          Company (optional)
+        </label>
+        <input
+          id="contact-company"
+          name="company"
+          autocomplete="organization"
+          maxlength="120"
+          placeholder="Where you work"
+        />
+      </div>
+      <fieldset>
+        <legend class="mono">Budget (optional)</legend>
+        <div class="budget-options">
+          {budgets.map((budget, i) => (
+            <label>
+              <input
+                type="radio"
+                name="budget"
+                value={budget}
+                id={`budget-${i}`}
+              />
+              <span>{budget}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <div class="field">
+        <label class="mono" for="contact-message">
+          About your project
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          required
+          rows="5"
+          maxlength="5000"
+          placeholder="What are you building, and when would you like to launch?"
+        ></textarea>
+        <span class="field-error" id="message-error"></span>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input name="website" id="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <div class="form-bottom">
+        <button type="submit" class="button">
+          Send message <ArrowUpRight size={16} />
+        </button>
+        <p id="contact-note">
+          We only use your details to answer this request. No newsletters, ever.
+        </p>
+      </div>
+      <p id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>

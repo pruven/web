@@ -1,0 +1,10 @@
+---
+interface Props {
+  large?: boolean;
+}
+const { large = false } = Astro.props;
+---
+
+<span class:list={['logo', { 'logo-large': large }]} aria-label="Pruven">
+  <span>pruven</span>
+</span>

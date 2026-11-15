@@ -1,0 +1,38 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import Heading from './Heading.astro';
+import Tags from './Tags.astro';
+import { services } from '../data/studio';
+---
+
+<section id="services" class="section">
+  <div class="wrap section-pad">
+    <div class="section-head">
+      <div class="head-title">
+        <SectionLabel number="02" text="Services" />
+        <Heading
+          lines={['Everything it takes to', 'design, ship and scale.']}
+        />
+      </div>
+      <p class="section-description reveal">
+        One senior team from the first workshop to production and beyond. No
+        hand-offs between agencies, no lost context, one shared roadmap.
+      </p>
+    </div>
+    <ul class="services-grid">
+      {services.map((service, i) => (
+        <li class="service-card">
+          <div class="service-visual">
+            <canvas data-art={service.art} aria-hidden="true"></canvas>
+            <span class="mono">0{i + 1}</span>
+          </div>
+          <div class="service-body">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <Tags tags={service.tags} />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+{
+  "width": 768,
+  "height": 1024,
+  "scrollWidth": 768,
+  "sections": [
+    {
+      "id": "top",
+      "y": 0,
+      "height": 1024
+    },
+    {
+      "id": "clients",
+      "y": 1024,
+      "height": 86
+    },
+    {
+      "id": "studio",
+      "y": 1110,
+      "height": 1075
+    },
+    {
+      "id": "services",
+      "y": 2185,
+      "height": 1663
+    },
+    {
+      "id": "work",
+      "y": 3848,
+      "height": 3584
+    },
+    {
+      "id": "testimonial",
+      "y": 7432,
+      "height": 914
+    },
+    {
+      "id": "process",
+      "y": 8346,
+      "height": 1078
+    },
+    {
+      "id": "contact",
+      "y": 9424,
+      "height": 1490
+    },
+    {
+      "id": "footer",
+      "y": 10914,
+      "height": 800
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Host Grotesk Variable",
+      "status": "loaded"
+    },
+    {
+      "family": "DM Mono",
+      "status": "loaded"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,29 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+interface Props {
+  href: string;
+  secondary?: boolean;
+  small?: boolean;
+  arrow?: boolean;
+  class?: string;
+}
+const {
+  href,
+  secondary = false,
+  small = false,
+  arrow = true,
+  class: cls,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'button',
+    { 'button-secondary': secondary, 'button-small': small },
+    cls,
+  ]}
+>
+  <slot />
+  {arrow && <ArrowUpRight size={16} />}
+</a>

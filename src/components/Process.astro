@@ -1,0 +1,35 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import Heading from './Heading.astro';
+import { processSteps } from '../data/studio';
+---
+
+<section id="process" class="section">
+  <div class="wrap section-pad">
+    <div class="section-head work-head">
+      <div class="head-title">
+        <SectionLabel number="04" text="Process" />
+        <Heading
+          lines={['A simple way of working,', 'run by senior people.']}
+        />
+      </div>
+      <p class="section-description reveal">
+        Fixed scopes, weekly demos and one accountable lead. You always know
+        what ships next and why.
+      </p>
+    </div>
+    <ol class="process-grid">
+      {processSteps.map((step, i) => (
+        <li>
+          <div class="process-rule" aria-hidden="true"></div>
+          <div class="process-meta mono">
+            <span>0{i + 1}</span>
+            <span>{step.time}</span>
+          </div>
+          <h3>{step.name}</h3>
+          <p>{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

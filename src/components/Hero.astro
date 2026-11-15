@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import Heading from './Heading.astro';
+---
+
+<section id="top" class="hero">
+  <canvas class="hero-art" data-art="silk" aria-hidden="true"></canvas>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-meta mono">
+      <p>
+        Independent software studio
+        <br />
+        Milano, since 2016
+      </p>
+      <p class="availability">
+        <i></i>Booking projects for Q1 2027
+      </p>
+    </div>
+    <div class="hero-bottom">
+      <Heading hero lines={['Software', 'in motion.']} />
+      <div class="hero-description">
+        <p>
+          Pruven is an independent studio that designs and engineers digital
+          products, cloud platforms and data systems for companies that refuse
+          to stand still.
+        </p>
+        <div class="button-row">
+          <Button href="#contact">Start a project</Button>
+          <Button href="#work" secondary arrow={false}>
+            See our work
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+{
+  "width": 768,
+  "height": 1024,
+  "scrollWidth": 768,
+  "sections": [
+    {
+      "id": "top",
+      "y": 0,
+      "height": 1024
+    },
+    {
+      "id": "clients",
+      "y": 1024,
+      "height": 86
+    },
+    {
+      "id": "studio",
+      "y": 1110,
+      "height": 1075
+    },
+    {
+      "id": "services",
+      "y": 2185,
+      "height": 1663
+    },
+    {
+      "id": "work",
+      "y": 3848,
+      "height": 3580
+    },
+    {
+      "id": "testimonial",
+      "y": 7428,
+      "height": 914
+    },
+    {
+      "id": "process",
+      "y": 8342,
+      "height": 1078
+    },
+    {
+      "id": "contact",
+      "y": 9420,
+      "height": 1490
+    },
+    {
+      "id": "footer",
+      "y": 10910,
+      "height": 810
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Host Grotesk",
+      "status": "unloaded"
+    },
+    {
+      "family": "Host Grotesk",
+      "status": "loaded"
+    },
+    {
+      "family": "Host Grotesk Fallback",
+      "status": "unloaded"
+    },
+    {
+      "family": "DM Mono",
+      "status": "unloaded"
+    },
+    {
+      "family": "DM Mono",
+      "status": "loaded"
+    },
+    {
+      "family": "DM Mono",
+      "status": "unloaded"
+    },
+    {
+      "family": "DM Mono",
+      "status": "unloaded"
+    },
+    {
+      "family": "DM Mono Fallback",
+      "status": "unloaded"
+    }
+  ],
+  "errors": []
+}

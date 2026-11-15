@@ -1,0 +1,12 @@
+---
+interface Props {
+  tags: string[];
+}
+const { tags } = Astro.props;
+---
+
+<ul class="tags">
+  {tags.map((tag) => (
+    <li>{tag}</li>
+  ))}
+</ul>

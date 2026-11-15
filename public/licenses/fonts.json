@@ -1,0 +1,6 @@
+{
+  "license": "SIL Open Font License 1.1; see host-grotesk.txt and dm-mono.txt",
+  "note": "Matching reference Latin subsets, self-hosted locally. No remote font requests at runtime.",
+  "host-grotesk-latin.woff2": "https://onda-template.modulify.website/_next/static/media/3a11180d498b75c0-s.p.0nf3i61nys3z7.woff2",
+  "dm-mono-latin.woff2": "https://onda-template.modulify.website/_next/static/media/36363bfb06833f56-s.p.0-pny06~-x26a.woff2"
+}

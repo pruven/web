@@ -1,0 +1,34 @@
+---
+interface Props {
+  lines: string[];
+  hero?: boolean;
+  contact?: boolean;
+  as?: 'h1' | 'h2';
+}
+const { lines, hero = false, contact = false, as } = Astro.props;
+const Tag = as || (hero ? 'h1' : 'h2');
+let index = 0;
+---
+
+<Tag
+  class:list={[
+    'split-heading',
+    { 'hero-heading': hero, 'contact-heading': contact },
+  ]}
+  aria-label={lines.join(' ')}
+>
+  {lines.map((line) => (
+    <span class="heading-line" aria-hidden="true">
+      {line.split(' ').map((word, i) => (
+        <>
+          {i > 0 && ' '}
+          <span class="word-clip">
+            <span class="word" style={`--word:${index++}`}>
+              {word}
+            </span>
+          </span>
+        </>
+      ))}
+    </span>
+  ))}
+</Tag>
