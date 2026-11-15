@@ -1,7 +1,7 @@
 ---
 import SectionLabel from './SectionLabel.astro';
 import Heading from './Heading.astro';
-import { Mail, Phone, MapPin, ArrowUpRight } from '@lucide/astro';
+import { Mail, ArrowUpRight } from '@lucide/astro';
 interface Props {
   standalone?: boolean;
 }
@@ -19,8 +19,8 @@ const budgets = ['Under €25k', '€25k to €75k', '€75k to €150k', 'Over 
         lines={['Let’s build', 'what’s next.']}
       />
       <p class="contact-description">
-        Tell us about your product, your timeline and what success looks like. A
-        partner replies within one business day.
+        Have a freelance project in mind? Tell us what you need built. You can
+        also get in touch about Zeke or our software experiments.
       </p>
       <ul class="contact-details">
         <li>
@@ -28,16 +28,6 @@ const budgets = ['Under €25k', '€25k to €75k', '€75k to €150k', 'Over 
             <Mail size={20} />
             <span>hello@pruven.studio</span>
           </a>
-        </li>
-        <li>
-          <a href="tel:+390287341120">
-            <Phone size={20} />
-            <span>+39 02 8734 1120</span>
-          </a>
-        </li>
-        <li>
-          <MapPin size={20} />
-          <span>Via Tortona 31, 20144 Milano, Italy</span>
         </li>
       </ul>
     </div>

@@ -1,6 +1,8 @@
 # Pruven Studio — Astro recreation
 
-Pruven is a standalone recreation of [the Onda reference](https://onda-template.modulify.website/), built with Astro, TypeScript, Tailwind CSS v4, GSAP ScrollTrigger, Motion, and Lucide. Native Astro components render all page content. No React, hydration islands, Modulify dependencies, remote runtime assets, or hosted APIs are required.
+Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. Zeke is its only current product.
+
+This website is a standalone recreation of [the Onda reference](https://onda-template.modulify.website/), built with Astro, TypeScript, Tailwind CSS v4, GSAP ScrollTrigger, Motion, and Lucide. Native Astro components render all page content. No React, hydration islands, Modulify dependencies, remote runtime assets, or hosted APIs are required.
 
 ## Run with Bun
 
@@ -29,7 +31,7 @@ Copy `.env.example` to `.env` and set `SITE_URL` to the deployment's public orig
 
 Without an endpoint, submitting the validated form opens an email draft in the visitor's mail app. The status explicitly explains that the visitor must send the draft; the site never reports delivery without an endpoint response. This makes the static site usable locally without pretending that a backend exists.
 
-The studio details, client names, results, and testimonial reproduce illustrative reference content. Replace these with authorized business details and claims before publishing a real studio website. The portrait is a replacement stock image, not a verified image of the named speaker.
+Pruven currently has one product: [Zeke](https://zeke.pruven.top/), a Git hook that copies missing, ignored environment files into new worktrees. The template’s fictional clients, projects, statistics, testimonial, founding date, address, and phone number have been removed. The product section shows a native HTML terminal with documented Bun installation commands and a copy button. Confirm the contact email before publishing.
 
 ## Structure
 
@@ -38,10 +40,10 @@ The studio details, client names, results, and testimonial reproduce illustrativ
 - `src/styles/global.css`: reference-derived dimensions, typography, colors, responsive grids, and interaction styles.
 - `src/scripts/art.ts`: original Canvas 2D cloth, service diagrams, image halftones, and dotted wordmark.
 - `src/scripts/site.ts`: GSAP reveals and counts, Motion mobile navigation, accessible menu state, and form behavior.
-- `src/assets/`: local source photographs; Astro generates responsive WebP variants.
+- `src/data/product.ts`: the current product, documentation URL, description, and copyable installation commands.
 - `public/fonts/`: self-hosted, Latin-subset WOFF2 fonts.
-- `public/licenses/`: font licenses and image provenance.
-- `tests/`: Playwright checks for breakpoints, navigation, keyboard/touch image reveal, form states, asset independence, and reduced motion.
+- `public/licenses/`: font licenses and provenance.
+- `tests/`: Playwright checks for breakpoints, navigation, Zeke links and clipboard behavior, form states, asset independence, and reduced motion.
 - `inspection/`: reference and local screenshots, measurements, and visual review notes.
 
 ## Visual verification
@@ -55,10 +57,10 @@ bun run test:visual --reference
 
 The second command inspects the live reference using Playwright and captures both versions. Screenshots cover 1440×900, 768×1024, and 390×844, with individual sections, full pages, section dimensions, font state, and browser errors. To capture another local port, set `CAPTURE_URL=http://localhost:4322`.
 
-Motion respects `prefers-reduced-motion`, pauses off-screen canvas rendering, caps rendering at 20 fps and device pixel ratio at 1.5, and keeps static content readable without JavaScript. Native anchor scrolling matches the reference without adding Lenis. Keyboard focus and touch taps reveal project photos as well as mouse hover.
+Motion respects `prefers-reduced-motion`, pauses off-screen canvas rendering, caps rendering at 20 fps and device pixel ratio at 1.5, and keeps static content readable without JavaScript. Native anchor scrolling matches the reference without adding Lenis. The product terminal stays readable without JavaScript.
 
 ## Assets and fidelity
 
-Host Grotesk and DM Mono are licensed under SIL OFL 1.1. The matching Latin subsets are stored locally; license files are included. Lucide icons use the ISC license. Replacement photographs are downloaded from Unsplash under the [Unsplash License](https://unsplash.com/license); exact download URLs are recorded in `public/licenses/images.json`. No reference photographs or proprietary animation implementations are redistributed.
+Host Grotesk and DM Mono are licensed under SIL OFL 1.1. The matching Latin subsets are stored locally; license files are included. Lucide icons use the ISC license. No stock photography is used in the current product presentation. No reference photographs or proprietary animation implementations are redistributed.
 
-The layout, content, and motion timing follow the reference. Photographs and the original procedural artwork intentionally differ; animated frames cannot have an exact pixel identity. The reference's third-party editor badge is omitted. See `inspection/REPORT.md` for the measured comparison and validation results.
+The layout, content, and motion timing follow the reference. The single-product content and original procedural artwork intentionally differ; animated frames cannot have an exact pixel identity. The reference's third-party editor badge is omitted. See `inspection/REPORT.md` for the measured comparison and validation results.

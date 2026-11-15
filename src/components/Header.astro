@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import Button from './Button.astro';
 import { Menu, X } from '@lucide/astro';
-const links = ['Work', 'Services', 'Process', 'Studio'];
+const links = ['Products', 'Services', 'Process', 'Studio'];
 ---
 
 <a href="#main" class="skip-link">
@@ -17,7 +17,9 @@ const links = ['Work', 'Services', 'Process', 'Studio'];
       <ul>
         {links.map((link) => (
           <li>
-            <a href={`/#${link.toLowerCase()}`}>{link}</a>
+            <a href={`/#${link === 'Products' ? 'work' : link.toLowerCase()}`}>
+              {link}
+            </a>
           </li>
         ))}
       </ul>
@@ -42,7 +44,9 @@ const links = ['Work', 'Services', 'Process', 'Studio'];
         <ul>
           {links.map((link, i) => (
             <li>
-              <a href={`/#${link.toLowerCase()}`}>
+              <a
+                href={`/#${link === 'Products' ? 'work' : link.toLowerCase()}`}
+              >
                 {link}
                 <span class="mono">0{i + 1}</span>
               </a>

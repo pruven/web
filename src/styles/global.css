@@ -1332,3 +1332,181 @@ fieldset {
 .section:before {
   opacity: 0.55;
 }
+
+/* The studio currently has one product. Keep the reference grid, with a real CLI view. */
+.zeke-product {
+  display: grid;
+  gap: 48px;
+  margin-top: 64px;
+  align-items: center;
+}
+.zeke-terminal {
+  background: #101115;
+  color: #e8e9ee;
+  border: 1px solid #24262e;
+  min-width: 0;
+  position: relative;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #2b2d35;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #a7aab7;
+}
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+.terminal-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4d4f5c;
+}
+.copy-install {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: none;
+  color: #d9caff;
+  padding: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.copy-install:hover {
+  color: white;
+}
+.terminal-content {
+  padding: 32px 24px;
+  font: 12px/1.9 var(--font-mono);
+}
+.terminal-content pre {
+  margin: 12px 0 32px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+.terminal-comment {
+  color: #9296a5;
+}
+.terminal-prompt {
+  color: #a78bfa;
+}
+.terminal-output {
+  margin-top: 24px;
+  color: #d1d4df;
+}
+.terminal-output span {
+  color: #c4b5fd;
+}
+.terminal-result {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #2b2d35;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #b4b8c7;
+}
+.terminal-result i {
+  width: 6px;
+  height: 6px;
+  background: #a78bfa;
+  flex-shrink: 0;
+}
+.copy-status {
+  font: 12px/1.6 var(--font-mono);
+  color: #ddd6fe;
+  padding: 0 24px 24px;
+}
+.copy-status:empty {
+  display: none;
+}
+.zeke-copy h3 {
+  font-size: clamp(48px, 6vw, 80px);
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  line-height: 1.05;
+  margin-top: 16px;
+}
+.zeke-tagline {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-top: 20px;
+}
+.zeke-description {
+  font-size: 17px;
+  line-height: 1.625;
+  color: var(--muted);
+  margin-top: 24px;
+}
+.zeke-copy .tags {
+  margin-top: 24px;
+}
+.zeke-features {
+  margin: 32px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.zeke-features li {
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+}
+.zeke-features li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.zeke-docs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+.zeke-docs:hover {
+  color: var(--purple-dark);
+}
+.product-facts .stat-number {
+  font-size: clamp(36px, 4vw, 60px);
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .zeke-product {
+    margin-top: 96px;
+  }
+  .terminal-content {
+    padding: 48px 32px;
+    font-size: 14px;
+  }
+}
+@media (min-width: 1024px) {
+  .zeke-product {
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+  }
+  .zeke-copy {
+    padding-block: 16px;
+  }
+}
+@media (max-width: 420px) {
+  .copy-install span {
+    display: none;
+  }
+  .terminal-bar {
+    padding-inline: 20px;
+  }
+  .terminal-dots {
+    gap: 4px;
+  }
+  .terminal-content {
+    padding: 28px 20px;
+  }
+}

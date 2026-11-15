@@ -2,108 +2,90 @@
 import SectionLabel from './SectionLabel.astro';
 import Heading from './Heading.astro';
 import Tags from './Tags.astro';
-import Halftone from './Halftone.astro';
-import { ArrowRight } from '@lucide/astro';
-import polaris from '../assets/polaris.jpg';
-import marea from '../assets/marea.jpg';
-import arcadia from '../assets/arcadia.jpg';
-import vela from '../assets/vela.jpg';
-const projects = [
-  {
-    client: 'Polaris Mobility',
-    sector: 'Mobility',
-    year: '2025',
-    title: 'A real-time fleet platform tracking 18,000 vehicles across Europe',
-    metric: '−38%',
-    outcome: 'Empty kilometres',
-    tags: ['Cloud', 'Data', 'Web app'],
-    image: polaris,
-    alt: 'Aerial view of green fields and a winding landscape',
-    position: '50% 42%',
-  },
-  {
-    client: 'Marea Bank',
-    sector: 'Fintech',
-    year: '2026',
-    title: 'A mobile banking app rebuilt for 1.2 million customers',
-    metric: '4.8',
-    outcome: 'App Store rating',
-    tags: ['iOS', 'Android', 'Design system'],
-    image: marea,
-    alt: 'A smartphone displaying a mobile app',
-  },
-  {
-    client: 'Arcadia Health',
-    sector: 'Healthcare',
-    year: '2025',
-    title: 'Online booking for a network of 64 clinics',
-    metric: '90s',
-    outcome: 'Average booking time',
-    tags: ['Product design', 'Web', 'Integrations'],
-    image: arcadia,
-    alt: 'A clinician at work',
-    position: '50% 28%',
-  },
-  {
-    client: 'Vela Energy',
-    sector: 'Energy',
-    year: '2024',
-    title: 'Machine learning forecasts for 2.4 GW of wind capacity',
-    metric: '−27%',
-    outcome: 'Forecast error',
-    tags: ['Data and AI', 'Forecasting', 'Dashboards'],
-    image: vela,
-    alt: 'Wind turbines generating renewable energy',
-    position: '50% 30%',
-  },
-];
+import Button from './Button.astro';
+import { Copy, ArrowUpRight } from '@lucide/astro';
+import { product } from '../data/product';
 ---
 
 <section id="work" class="section">
   <div class="wrap section-pad">
     <div class="section-head work-head">
       <div class="head-title">
-        <SectionLabel number="03" text="Selected work" />
-        <Heading lines={['Recent work,', 'measured in outcomes.']} />
+        <SectionLabel number="03" text="Our product" />
+        <Heading lines={['Small tools.', 'Less friction.']} />
       </div>
-      <div class="section-description reveal">
-        <p>
-          A few of the products we designed, built and still run with our
-          clients. Hover a project to see the original photo behind the dots.
-        </p>
-        <a href="#contact" class="case-link mono">
-          Request full case studies <ArrowRight size={16} />
-        </a>
-      </div>
+      <p class="section-description reveal">
+        Zeke is our first and currently only product. It handles the environment
+        file setup that comes with a new Git worktree.
+      </p>
     </div>
-    <div class="work-grid">
-      {projects.map((project, i) => (
-        <article class:list={['project', `project-${i + 1}`]}>
-          <div class="project-visual">
-            <Halftone
-              src={project.image}
-              alt={project.alt}
-              position={project.position}
-            />
-            <span class="project-year mono">{project.year}</span>
-          </div>
-          <div class="project-info">
-            <div>
-              <p class="mono project-client">
-                {project.client}
-                <span>/</span>
-                {project.sector}
-              </p>
-              <h3>{project.title}</h3>
-            </div>
-            <p class="project-metric">
-              <strong>{project.metric}</strong>
-              <span class="mono">{project.outcome}</span>
+    <article class="zeke-product" aria-labelledby="zeke-title">
+      <div
+        class="zeke-terminal"
+        aria-label="Zeke installation and example output"
+      >
+        <div class="terminal-bar">
+          <span class="terminal-dots" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          <span>zeke / terminal</span>
+          <button
+            type="button"
+            class="copy-install"
+            data-copy-install
+            aria-label="Copy Zeke installation commands"
+          >
+            <Copy size={16} />
+            <span>Copy install</span>
+          </button>
+        </div>
+        <div class="terminal-content">
+          <p class="terminal-comment"># Add Zeke to your project</p>
+          <pre><code><span class="terminal-prompt">$</span> bun add --dev @pruven/zeke
+<span class="terminal-prompt">$</span> bun --bun zeke install</code></pre>
+          <p class="terminal-comment"># Create your next worktree</p>
+          <pre><code><span class="terminal-prompt">$</span> git worktree add ../my-feature -b my-feature</code></pre>
+          <div class="terminal-output">
+            <p>
+              <span>zeke:</span> copied ".env"
+            </p>
+            <p>
+              <span>zeke:</span> copied "apps/api/.env.local"
             </p>
           </div>
-          <Tags tags={project.tags} />
-        </article>
-      ))}
-    </div>
+          <p class="terminal-result">
+            <i aria-hidden="true"></i>Environment files, ready to go.
+          </p>
+        </div>
+        <p
+          class="copy-status"
+          role="status"
+          aria-live="polite"
+          data-copy-status
+        ></p>
+      </div>
+      <div class="zeke-copy">
+        <p class="mono">Pruven / Developer tools</p>
+        <h3 id="zeke-title">{product.name}</h3>
+        <p class="zeke-tagline">
+          Environment files.
+          <br />
+          In every worktree.
+        </p>
+        <p class="zeke-description">{product.description}</p>
+        <Tags tags={product.tags} />
+        <ul class="zeke-features">
+          <li>Copies missing files without overwriting existing ones</li>
+          <li>Preserves nested folders</li>
+          <li>Logs filenames, never file contents</li>
+        </ul>
+        <Button href={product.url}>View Zeke</Button>
+        <a class="zeke-docs mono" href={product.url}>
+          Installation and documentation <ArrowUpRight size={14} />
+        </a>
+      </div>
+    </article>
   </div>
 </section>

@@ -9,42 +9,43 @@ import { ArrowUp } from '@lucide/astro';
       <div class="footer-brand">
         <Logo />
         <p>
-          Independent software studio designing and engineering digital products
-          since 2016.
+          An experimental software company building its own products and taking
+          on freelance projects for clients.
         </p>
       </div>
       <nav aria-label="Footer">
         <p class="mono">Sitemap</p>
         <ul>
-          {['Work', 'Services', 'Process', 'Studio', 'Contact'].map((link) => (
-            <li>
-              <a
-                href={
-                  link === 'Contact' ? '/contact' : `/#${link.toLowerCase()}`
-                }
-              >
-                {link}
-              </a>
-            </li>
-          ))}
+          {['Products', 'Services', 'Process', 'Studio', 'Contact'].map(
+            (link) => (
+              <li>
+                <a
+                  href={
+                    link === 'Contact'
+                      ? '/contact'
+                      : `/#${link === 'Products' ? 'work' : link.toLowerCase()}`
+                  }
+                >
+                  {link}
+                </a>
+              </li>
+            ),
+          )}
         </ul>
       </nav>
       <div>
-        <p class="mono">Studio</p>
-        <address>
-          Via Tortona 31
-          <br />
-          20144 Milano, Italy
-        </address>
+        <p class="mono">Product</p>
+        <ul>
+          <li>
+            <a href="https://zeke.pruven.top/">Zeke</a>
+          </li>
+        </ul>
       </div>
       <div>
         <p class="mono">Say hello</p>
         <ul>
           <li>
             <a href="mailto:hello@pruven.studio">hello@pruven.studio</a>
-          </li>
-          <li>
-            <a href="tel:+390287341120">+39 02 8734 1120</a>
           </li>
         </ul>
       </div>
@@ -53,8 +54,8 @@ import { ArrowUp } from '@lucide/astro';
       <canvas data-art="wordmark" aria-hidden="true"></canvas>
     </div>
     <div class="footer-legal mono">
-      <p>© {new Date().getFullYear()} Pruven Studio S.r.l.</p>
-      <p>Designed and built in Milano</p>
+      <p>© {new Date().getFullYear()} Pruven</p>
+      <p>Experiments &amp; client work</p>
       <a href="/#top">
         Back to top <ArrowUp size={14} />
       </a>

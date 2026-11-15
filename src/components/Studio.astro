@@ -1,29 +1,17 @@
 ---
 import SectionLabel from './SectionLabel.astro';
-const stats = [
+const facts = [
+  ['Our product', '1', 'Zeke is our first and currently only product.'],
+  ['Our approach', 'R&D', 'Exploring ideas through experimental software.'],
   [
-    'Products shipped',
-    '120',
-    '+',
-    'From first versions to platforms serving millions.',
+    'Client work',
+    'Build',
+    'Freelance software development for client projects.',
   ],
   [
-    'Years building',
-    '9',
-    '',
-    'Founded in Milano in 2016, independent ever since.',
-  ],
-  [
-    'Specialists',
-    '40',
-    '',
-    'Engineers, designers and data people, all senior.',
-  ],
-  [
-    'Clients who return',
-    '94',
-    '%',
-    'Most partnerships run for three years or more.',
+    'Available now',
+    'Zeke',
+    'Read the guide and get started at zeke.pruven.top.',
   ],
 ];
 ---
@@ -33,21 +21,20 @@ const stats = [
     <div class="studio-intro">
       <SectionLabel number="01" text="The studio" />
       <p class="studio-statement reveal">
-        We are forty engineers, designers and data specialists building calm,
-        dependable software for ambitious companies.{' '}
+        Pruven is an experimental software company. We build our own products to
+        explore ideas and take on freelance software projects for clients.{' '}
         <span>
-          Small senior teams, weekly releases, and we stay long after launch.
+          Our first product is Zeke. Our next experiment starts with an idea.
         </span>
       </p>
     </div>
-    <ul class="stats">
-      {stats.map(([label, n, suffix, text]) => (
+    <ul class="stats product-facts">
+      {facts.map(([label, value, text]) => (
         <li>
           <div class="reveal">
             <p class="mono">{label}</p>
             <p class="stat-number">
-              <span data-count={n}>{n}</span>
-              {suffix}
+              {value === '1' ? <span data-count="1">1</span> : value}
             </p>
             <p class="stat-description">{text}</p>
           </div>

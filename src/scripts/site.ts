@@ -2,6 +2,21 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate } from 'motion';
 import { initArt } from './art';
+import { product } from '../data/product';
+
+document
+  .querySelector<HTMLButtonElement>('[data-copy-install]')
+  ?.addEventListener('click', async () => {
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    try {
+      await navigator.clipboard.writeText(product.install);
+      if (status) status.textContent = 'Installation commands copied.';
+    } catch {
+      if (status)
+        status.textContent =
+          'Could not copy. Select the commands above to copy them manually.';
+    }
+  });
 
 gsap.registerPlugin(ScrollTrigger);
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');

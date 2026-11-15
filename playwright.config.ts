@@ -7,7 +7,7 @@ export default defineConfig({
     headless: true,
   },
   webServer: {
-    command: 'bun run preview --port 4321',
+    command: 'node scripts/test-server.mjs',
     url: process.env.TEST_URL || 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
   },

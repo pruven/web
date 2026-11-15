@@ -36,6 +36,7 @@ try {
         'process',
         'contact',
       ]) {
+        if (!(await page.locator(`#${id}`).count())) continue;
         await page.locator(`#${id}`).evaluate((el) =>
           window.scrollTo({
             top: el.getBoundingClientRect().top + scrollY,

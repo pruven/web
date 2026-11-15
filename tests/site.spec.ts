@@ -26,11 +26,14 @@ for (const width of [1440, 768, 390]) {
       ),
     ).toBe(true);
     await page.locator('#work').scrollIntoViewIfNeeded();
-    const art = page.locator('.halftone').first();
-    await art.focus();
-    await expect(art.locator('img')).toHaveCSS('opacity', '1');
-    await art.press('Enter');
-    await expect(art).toHaveClass(/is-revealed/);
+    await expect(page.locator('.zeke-product')).toHaveCount(1);
+    await expect(
+      page.getByRole('heading', { name: 'Zeke', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'View Zeke', exact: true }),
+    ).toHaveAttribute('href', 'https://zeke.pruven.top/');
+    await expect(page.locator('#testimonial, #clients')).toHaveCount(0);
     await page.evaluate(() =>
       document.querySelector('footer')?.scrollIntoView(),
     );
@@ -117,12 +120,38 @@ test('reduced motion keeps all content visible and freezes canvas', async ({
     await expect(el).toHaveCSS('opacity', '1');
 });
 
-test('photographs remain visible without JavaScript', async ({ browser }) => {
+test('product details remain visible without JavaScript', async ({
+  browser,
+}) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(process.env.TEST_URL || 'http://localhost:4321');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.locator('.halftone img').first()).toHaveCSS('opacity', '1');
-  await expect(page.locator('[data-count="120"]')).toHaveText('120');
+  await expect(page.locator('.terminal-content')).toContainText(
+    'bun add --dev @pruven/zeke',
+  );
+  await expect(page.locator('[data-count="1"]')).toHaveText('1');
   await context.close();
+});
+
+test('copies the documented Bun installation commands', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: async (text: string) => {
+          (window as Window & { copied?: string }).copied = text;
+        },
+      },
+    });
+  });
+  await page.goto('/');
+  await page
+    .getByRole('button', { name: 'Copy Zeke installation commands' })
+    .click();
+  await expect(page.locator('[data-copy-status]')).toContainText(
+    'commands copied',
+  );
+  expect(
+    await page.evaluate(() => (window as Window & { copied?: string }).copied),
+  ).toBe('bun add --dev @pruven/zeke\nbun --bun zeke install');
 });

@@ -31,26 +31,26 @@ export const services = [
 export const processSteps = [
   {
     name: 'Discover',
-    time: '1 to 2 weeks',
+    time: 'Understand',
     description:
-      'Workshops, user interviews and a technical audit. You leave with a clear scope, a plan and a fixed estimate.',
+      'Understand the idea, the people using the software, and what a useful result looks like.',
   },
   {
     name: 'Design',
-    time: '2 to 4 weeks',
+    time: 'Simplify',
     description:
-      'Flows, prototypes and a design system, tested with real users before a line of production code is written.',
+      'Explore possible approaches, sketch the interface, and agree on a focused direction.',
   },
   {
     name: 'Build',
-    time: '8 to 16 weeks',
+    time: 'Implement',
     description:
-      'Weekly releases to a live staging environment, so you can see and steer progress every Friday.',
+      'Turn the design into working software, test its behavior, and prepare it for use.',
   },
   {
     name: 'Evolve',
     time: 'Ongoing',
     description:
-      'Monitoring, support and a roadmap for what comes next. Most of our clients stay with us for years.',
+      'Use feedback to fix rough edges, improve documentation, and decide what to build next.',
   },
 ];

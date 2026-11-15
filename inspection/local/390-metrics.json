@@ -9,44 +9,34 @@
       "height": 844
     },
     {
-      "id": "clients",
-      "y": 844,
-      "height": 123
-    },
-    {
       "id": "studio",
-      "y": 967,
-      "height": 1516
+      "y": 844,
+      "height": 1420
     },
     {
       "id": "services",
-      "y": 2482,
-      "height": 2454
+      "y": 2264,
+      "height": 2378
     },
     {
       "id": "work",
-      "y": 4937,
-      "height": 2652
-    },
-    {
-      "id": "testimonial",
-      "y": 7589,
-      "height": 961
+      "y": 4642,
+      "height": 1734
     },
     {
       "id": "process",
-      "y": 8550,
-      "height": 1576
+      "y": 6376,
+      "height": 1456
     },
     {
       "id": "contact",
-      "y": 10126,
-      "height": 1611
+      "y": 7832,
+      "height": 1542
     },
     {
       "id": "footer",
-      "y": 11737,
-      "height": 995
+      "y": 9374,
+      "height": 958
     }
   ],
   "fonts": [

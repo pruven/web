@@ -1,3 +1,15 @@
+# Company positioning
+
+Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. The hero, studio, services, process, contact, footer, metadata, and Open Graph image reflect both sides of the company. Zeke remains its only current product.
+
+# Current product update
+
+Pruven currently has one product, [Zeke](https://zeke.pruven.top/). The product section now presents Zeke’s documented Git-worktree functionality and Bun installation commands in a native HTML terminal. The fictional projects, client strip, numeric proof, and testimonial have been removed, along with the template’s founding date, legal company suffix, address, phone number, and delivery-time promises. Navigation labels the work anchor “Products”. Typography, colors, section styling, canvas artwork, and responsive behavior are preserved.
+
+The reference measurements below describe the earlier template recreation and are historical; they are not similarity claims for the updated, shorter product page. Current screenshots are stored under `local/`. The updated production build and all eight Playwright tests pass, including the product URL, installation clipboard contents, responsive layout, and JavaScript-disabled terminal presentation.
+
+---
+
 # Pruven recreation — visual and technical review
 
 Reference: https://onda-template.modulify.website/
@@ -32,7 +44,7 @@ Measured section-height differences, Pruven minus reference, in CSS pixels:
 
 The small footer differences accompany the longer Pruven wordmark and replacement wordmark rendering. These dimensions describe layout alignment, not a claimed pixel-similarity percentage. The rebrand, replacement photographs, and independently implemented animated artwork necessarily differ. The third-party editor badge is deliberately omitted. The interactive `comparison.html` overlays reference and local hero screenshots and switches among all three widths.
 
-## Verification
+## Verification of the original recreation
 
 - `bun install --frozen-lockfile` succeeds.
 - `bun run build` succeeds: zero errors, warnings, or hints from Astro/TypeScript; static home/contact pages, sitemap, robots, and 20 responsive image variants generated.
