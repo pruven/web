@@ -1,25 +1,40 @@
-# Pruven visual update
+# Current Pruven visuals
 
-Pruven is a software company building experimental products and taking freelance client work. This update keeps the existing Onda-derived layout, Host Grotesk / DM Mono typography, white ground and blue accent.
+Pruven is a software company building experimental products and taking freelance client work. The existing Onda-derived white layout, Host Grotesk / DM Mono typography, blue accent, service copy and solid footer wordmark remain.
 
-## Current hero
+## Hero
 
-The user-supplied React Bits GradientASCII source replaces the ribbon illustration. The shader passes, glyph atlas, horizon shape, blue palette, cursor scrambling and click waves are retained in a native Astro adapter; React is not installed. The canvas spans the entire hero, behind its content. A vertical mask and existing white foreground fade remove visible frame edges and keep the text readable at 1440, 768 and 390 px.
+The user-supplied GradientASCII shader is mounted natively in Astro as a full-section background, with vertical fades into the white page. It retains cursor scrambling and click waves. The hero releases its context when offscreen and remounts without replaying its intro on return, keeping graphics memory available for the service cards.
 
-The reusable component exposes typed options. Rendering is capped at 30 fps and 1 DPR. The shared motion control pauses the renderer, offscreen and hidden scenes stop, and reduced motion renders a still frame. A static, server-rendered ASCII fallback covers disabled JavaScript, unavailable WebGL2 and context loss. The pause control is hidden when no live animation is available.
+## Actual React Bits service effects
 
-The four service illustrations remain animated native SVG with individual pause controls. The footer remains a solid typographic wordmark.
+The former SVG approximations are replaced by the actual React Bits shader implementations:
+
+| Service | Effect | Source |
+| --- | --- | --- |
+| Product design | Micro Slats (interpreting “micro stats”) | https://reactbits.dev/backgrounds/micro-slats |
+| Web and mobile engineering | Pattern Waves | https://reactbits.dev/backgrounds/pattern-waves |
+| Cloud and platforms | Ghost Fibers | https://reactbits.dev/backgrounds/ghost-fibers |
+| Data and AI | CRT Warp | https://reactbits.dev/backgrounds/crt-warp |
+
+JavaScript/CSS source was retrieved from the corresponding `https://reactbits.dev/r/{Component}-JS-CSS.json` registry entries. The original shader math is retained. React lifecycle hooks are replaced by native mount functions; no React dependency is installed. Micro Slats and Pattern Waves use OGL 1.0.11. Colors and density are tuned for Pruven's small blue service frames.
+
+Renderers mount on viewport entry and release resources on exit. A shared scheduler caps them at 30 fps, pauses immediately through their controls, suspends hidden tabs and allows an actual completed still frame under reduced motion. Live preference changes remount the appropriate still or animated renderer. Static SVG fallback artwork remains visible without JavaScript or WebGL; unavailable animations hide their controls. The React Bits MIT + Commons Clause license and attribution are stored at `public/licenses/react-bits.txt`; these ports are integrated within Pruven's website.
 
 ## Visual review
 
-Native Playwright screenshots in this folder cover the hero, services and footer at 1440×900, 768×1024 and 390×844. The hero images were reviewed for blending, text contrast, navigation clearance and mobile overflow. The reference website does not include this user-requested shader treatment, so these images are not pixel-similarity claims.
+Captures named `services-{1440,768,390}-{effect}.png` show the actual renderers. Desktop captures were reviewed for the slat field, halftone folds, layered glowing fibers, and CRT plasma/scanlines. The hero, services and footer viewport captures are retained in this directory. These user-requested visuals intentionally differ from the original Onda template; no pixel-identity claim is made.
 
-The earlier full-page skill audit under `../dither/` is historical. Its inherited page-height and layout findings have not been presented as passing or changed as part of this component update. Native Chromium captures are used because the skill's stitched screenshot exporter produced corrupt strips on this host.
+Earlier whole-page skill checker findings under `../dither/` are historical, including inherited section-height and layout findings. This component update does not present those checks as passing. Native Playwright captures are used because the skill's stitched screenshot exporter produced corrupt strips on this host.
 
 ## Validation
 
-- `bun run build`: passes, with zero Astro/TypeScript errors, warnings or hints; both static pages generated.
-- Prettier check of the changed components, renderer, scripts, styles and tests: passes.
-- Native Playwright covers hero/background size equality at 1440, 768 and 390 px, independent local assets, Zeke links and clipboard, keyboard navigation, form states, reduced motion, motion/pause at desktop and mobile, unavailable WebGL, pointer/click shader uniforms, and context-loss fallback.
-- Final `TEST_URL=http://localhost:4323 bun run test`: **12 passed**. The desktop animation test permits 90 seconds because repeated full-hero screenshots use software-rendered WebGL in headless Chromium; its final run took 33.2 seconds. This is a test capture allowance, not a claim about real-device frame rate.
-- Final skill performance audit at 1440 and 390 px: **0 failures, 0 warnings**. About 128 KiB transferred, two local fonts, one live WebGL context, zero broken requests, and measured layout shift 0.000. This was a single-run local audit. Its fallback timing is a proxy; the report separately records CPU-emulated WebGL cost and does not measure real-GPU frame rate. See `performance.json`.
+The final checks cover responsive layout, local assets, navigation and keyboard behavior, form states, Zeke links and clipboard, no-JavaScript content, hero animation, all four service renderers at three widths, exact paused screenshots, reduced-motion stills and unavailable-WebGL fallbacks. Service animation tests isolate each renderer to avoid concurrent software-shader load distorting screenshot timing; production allows the visible cards to animate together.
+
+Final validation:
+
+- `bun run build`: passes with zero Astro/TypeScript errors, warnings or hints.
+- `TEST_URL=http://localhost:4323 bun run test`: **16 passed**. All four service effects render, change over time, freeze when paused and support live reduced-motion changes at 1440, 768 and 390 px. Unavailable WebGL retains visible fallbacks with no browser errors. Existing hero, navigation, product, form and responsive checks also pass.
+- Prettier check of all changed application code and tests: passes.
+- `git diff --check`: passes.
+- Final skill performance audit at 1440 and 390 px: **0 failures, 0 warnings**. About 187 KiB transferred, zero broken requests, layout shift 0.000, at most four live WebGL contexts on desktop (three on mobile), and zero retained contexts at the bottom. `performance.json` contains this run. This single-run local audit separates fallback timing from CPU-emulated WebGL cost and does not measure real-GPU frame rate.

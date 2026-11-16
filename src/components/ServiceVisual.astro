@@ -1,11 +1,24 @@
 ---
 import VisualFrame from './VisualFrame.astro';
 interface Props {
-  kind: string;
+  kind: 'micro-slats' | 'pattern-waves' | 'ghost-fibers' | 'crt-warp';
   id: string;
   label: string;
 }
 const { kind, id, label } = Astro.props;
+const wave = Array.from({ length: 19 }, (_, i) => {
+  const y = 30 + i * 8;
+  return `M-100 ${y} C0 ${y - 88} 65 ${y + 88} 160 ${y} S320 ${y - 88} 420 ${y}`;
+});
+const fibers = Array.from({ length: 38 }, (_, i) => {
+  const y = 42 + i * 3.5;
+  return `M-45 ${y + Math.sin(i * 0.5) * 15} C65 ${y - 90} 103 ${200 - y} 170 ${y - 5} S290 ${y + 75} 370 ${y - 10}`;
+});
+const grid = Array.from({ length: 13 }, (_, i) => {
+  const x = 16 + i * 24;
+  const bend = (x - 160) * 0.24;
+  return `M${x} -15 Q${x + bend} 104 ${x} 223`;
+});
 ---
 
 <VisualFrame
@@ -13,212 +26,162 @@ const { kind, id, label } = Astro.props;
   label={label}
   class={`service-illustration visual-${kind}`}
 >
-  <svg viewBox="0 0 320 208" fill="none" aria-hidden="true">
-    {kind === 'orbit' && (
-      <>
-        <rect
-          x="43"
-          y="34"
-          width="234"
-          height="146"
-          rx="10"
-          fill="white"
-          stroke="#d7dfe9"
-        />
-        <path d="M43 61H277" stroke="#e5eaf1" />
-        <rect x="57" y="46" width="48" height="4" rx="2" fill="#d5dde8" />
-        <rect x="58" y="77" width="64" height="87" rx="5" fill="#edf2fa" />
-        <rect x="138" y="79" width="111" height="7" rx="3.5" fill="#becbde" />
-        <rect x="138" y="94" width="78" height="5" rx="2.5" fill="#e1e7ef" />
-        <g class="design-selection">
+  <div
+    class="service-effect"
+    data-service-effect={kind}
+    data-effect-status="fallback"
+  >
+    <svg viewBox="0 0 320 208" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient
+          id={`${id}-ink`}
+          x1="0"
+          y1="0"
+          x2="320"
+          y2="208"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#315efb" />
+          <stop offset="0.55" stop-color="#93c5fd" />
+          <stop offset="1" stop-color="#38bdf8" />
+        </linearGradient>
+        <radialGradient id={`${id}-wash`}>
+          <stop stop-color="#b9d7ff" stop-opacity="0.65" />
+          <stop offset="1" stop-color="#eaf2ff" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient
+          id={`${id}-fiber`}
+          x1="0"
+          y1="0"
+          x2="320"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#385b96" stop-opacity="0" />
+          <stop offset="0.3" stop-color="#86aef6" stop-opacity="0.35" />
+          <stop offset="0.6" stop-color="#d5efff" />
+          <stop offset="1" stop-color="#507bb8" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id={`${id}-scan`} x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#86caff" stop-opacity="0" />
+          <stop offset="1" stop-color="#86caff" stop-opacity="0.18" />
+        </linearGradient>
+      </defs>
+      {kind === 'micro-slats' && (
+        <>
+          <rect width="320" height="208" fill="#edf3ff" />
+          {Array.from({ length: 21 }, (_, x) =>
+            Array.from({ length: 9 }, (_, y) => {
+              const strength =
+                0.25 + 0.75 * (0.5 + 0.5 * Math.sin(x * 0.3 + y * 0.7));
+              return (
+                <rect
+                  x={8 + x * 15}
+                  y={8 + y * 23}
+                  width="5"
+                  height={8 + strength * 12}
+                  rx="2.5"
+                  fill="#315efb"
+                  opacity={strength}
+                />
+              );
+            }),
+          )}
+        </>
+      )}
+      {kind === 'pattern-waves' && (
+        <>
+          <ellipse
+            cx="182"
+            cy="104"
+            rx="175"
+            ry="120"
+            fill={`url(#${id}-wash)`}
+          />
+          <g
+            class="pattern-wave-field"
+            stroke={`url(#${id}-ink)`}
+            stroke-width="1.25"
+          >
+            {wave.map((d, i) => (
+              <path
+                class="pattern-wave"
+                d={d}
+                style={`--i:${i}`}
+                opacity={0.3 + Math.sin((i / 19) * Math.PI) * 0.6}
+              />
+            ))}
+          </g>
+        </>
+      )}
+      {kind === 'ghost-fibers' && (
+        <>
+          <rect width="320" height="208" fill="#101e32" />
+          <ellipse
+            cx="175"
+            cy="110"
+            rx="160"
+            ry="95"
+            fill={`url(#${id}-wash)`}
+            opacity="0.13"
+          />
+          <g
+            class="ghost-fiber-field"
+            stroke={`url(#${id}-fiber)`}
+            stroke-width="0.7"
+          >
+            {fibers.map((d, i) => (
+              <path
+                class="ghost-fiber"
+                d={d}
+                style={`--i:${i}`}
+                opacity={0.2 + (i % 7) * 0.1}
+              />
+            ))}
+          </g>
+        </>
+      )}
+      {kind === 'crt-warp' && (
+        <>
+          <rect width="320" height="208" fill="#111f34" />
+          <g
+            class="crt-grid"
+            stroke="#6399e8"
+            stroke-width="0.7"
+            opacity="0.55"
+          >
+            {grid.map((d) => (
+              <path d={d} />
+            ))}
+            {Array.from({ length: 10 }, (_, i) => {
+              const y = 5 + i * 22;
+              return (
+                <path d={`M-10 ${y} Q160 ${y + (y - 104) * 0.36} 330 ${y}`} />
+              );
+            })}
+          </g>
+          <g class="crt-signal" stroke="#b4d8ff" stroke-width="1.5">
+            <path d="M107 90L91 104L107 118M213 90L229 104L213 118M173 82L148 126" />
+            <path
+              d="M78 69H91M78 69V82M242 69H229M242 69V82M78 139H91M78 139V126M242 139H229M242 139V126"
+              stroke-opacity="0.5"
+            />
+          </g>
+          <g stroke="#070e19" stroke-width="1" opacity="0.36">
+            {Array.from({ length: 52 }, (_, i) => (
+              <path d={`M0 ${i * 4}H320`} />
+            ))}
+          </g>
           <rect
-            x="136"
-            y="112"
-            width="113"
-            height="51"
-            rx="5"
-            fill="#f0f4ff"
-            stroke="#6c8de6"
+            class="crt-scan"
+            y="-60"
+            width="320"
+            height="60"
+            fill={`url(#${id}-scan)`}
           />
-          <rect x="147" y="123" width="54" height="5" rx="2.5" fill="#9bb0e1" />
-          <rect x="147" y="135" width="89" height="4" rx="2" fill="#d5dff3" />
-          <path
-            d="M131 107H142M131 107V118M254 107H243M254 107V118M131 168H142M131 168V157M254 168H243M254 168V157"
-            stroke="#315efb"
-            stroke-width="2"
-          />
-        </g>
-        <path
-          class="design-cursor"
-          d="M237 147L241 166L247 159L256 160L237 147Z"
-          fill="#315efb"
-          stroke="white"
-          stroke-width="2"
-        />
-      </>
-    )}
-    {kind === 'code' && (
-      <>
-        <rect x="35" y="33" width="250" height="148" rx="10" fill="#172337" />
-        <path d="M35 60H285" stroke="#344157" />
-        <rect x="50" y="46" width="59" height="4" rx="2" fill="#6c7d99" />
-        <text
-          x="53"
-          y="85"
-          fill="#8faeff"
-          font-size="12"
-          font-family="DM Mono,monospace"
-        >
-          function build() {'{'}
-        </text>
-        <text
-          x="64"
-          y="106"
-          fill="#c8d4e8"
-          font-size="12"
-          font-family="DM Mono,monospace"
-        >
-          const idea = explore();
-        </text>
-        <text
-          x="64"
-          y="128"
-          fill="#c8d4e8"
-          font-size="12"
-          font-family="DM Mono,monospace"
-        >
-          return ship(idea);
-        </text>
-        <text
-          x="53"
-          y="150"
-          fill="#8faeff"
-          font-size="12"
-          font-family="DM Mono,monospace"
-        >
-          {'}'}
-        </text>
-        <path
-          class="code-progress"
-          d="M64 136H210"
-          stroke="#7d9fff"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
-        <rect
-          class="code-caret"
-          x="218"
-          y="119"
-          width="2"
-          height="12"
-          fill="#9eb7ff"
-        />
-      </>
-    )}
-    {kind === 'cloud' && (
-      <>
-        <path
-          d="M160 83V113H79V140M160 113H241V140"
-          stroke="#cbd7e6"
-          stroke-width="2"
-        />
-        <path
-          class="cloud-packet cloud-packet-left"
-          d="M160 83V113H79V140"
-          stroke="#315efb"
-          stroke-width="3"
-          stroke-linecap="round"
-        />
-        <path
-          class="cloud-packet cloud-packet-right"
-          d="M160 83V113H241V140"
-          stroke="#315efb"
-          stroke-width="3"
-          stroke-linecap="round"
-        />
-        <rect
-          x="118"
-          y="35"
-          width="84"
-          height="51"
-          rx="8"
-          fill="white"
-          stroke="#d0dbe9"
-        />
-        <path
-          d="M133 51H186M133 63H170"
-          stroke="#b7c7dd"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <rect
-          class="cloud-node"
-          x="43"
-          y="140"
-          width="72"
-          height="37"
-          rx="7"
-          fill="white"
-          stroke="#d0dbe9"
-        />
-        <path
-          d="M57 158H100"
-          stroke="#b7c7dd"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <rect
-          class="cloud-node cloud-node-second"
-          x="205"
-          y="140"
-          width="72"
-          height="37"
-          rx="7"
-          fill="white"
-          stroke="#d0dbe9"
-        />
-        <path
-          d="M219 158H262"
-          stroke="#b7c7dd"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-      </>
-    )}
-    {kind === 'data' && (
-      <>
-        <rect
-          x="43"
-          y="33"
-          width="234"
-          height="148"
-          rx="10"
-          fill="white"
-          stroke="#d7dfe9"
-        />
-        <rect x="59" y="49" width="63" height="5" rx="2.5" fill="#bdcadc" />
-        <path d="M61 83H259M61 111H259M61 139H259" stroke="#edf1f6" />
-        {[42, 66, 50, 83, 70, 104].map((h, i) => (
-          <rect
-            class="chart-bar"
-            style={`--bar:${i}`}
-            x={70 + i * 30}
-            y={164 - h}
-            width="16"
-            height={h}
-            rx="3"
-            fill={i === 5 ? '#315efb' : '#c8d7ef'}
-          />
-        ))}
-        <path
-          class="chart-trend"
-          d="M65 127L101 110L135 117L170 91L205 96L252 64"
-          stroke="#6c8fe1"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </>
-    )}
-  </svg>
+        </>
+      )}
+    </svg>
+    {kind === 'ghost-fibers' && <canvas aria-hidden="true"></canvas>}
+  </div>
 </VisualFrame>

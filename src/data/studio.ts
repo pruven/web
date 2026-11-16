@@ -4,28 +4,28 @@ export const services = [
     description:
       'Research, UX and interface design that turns complex workflows into products people enjoy using every day.',
     tags: ['Discovery', 'UX research', 'Design systems', 'Prototyping'],
-    art: 'orbit',
+    art: 'micro-slats',
   },
   {
-    title: 'Web and mobile engineering',
+    title: 'Web engineering',
     description:
-      'Fast, accessible web apps and native-quality mobile apps, built on modern stacks and tested end to end.',
-    tags: ['React and Next.js', 'iOS and Android', 'APIs', 'Test automation'],
-    art: 'code',
+      'Fast, accessible web applications, built on modern stacks and tested end to end.',
+    tags: ['React and Next.js', 'TypeScript', 'APIs', 'Test automation'],
+    art: 'pattern-waves',
   },
   {
     title: 'Cloud and platforms',
     description:
       'Resilient infrastructure, migrations and DevOps that keep your product online and your costs predictable.',
     tags: ['AWS and Google Cloud', 'Kubernetes', 'CI/CD', 'Observability'],
-    art: 'cloud',
+    art: 'ghost-fibers',
   },
   {
     title: 'Data and AI',
     description:
       'Pipelines, analytics and applied machine learning that turn the data you already have into better decisions.',
     tags: ['Data engineering', 'Dashboards', 'LLM features', 'Forecasting'],
-    art: 'data',
+    art: 'crt-warp',
   },
 ] as const;
 export const processSteps = [

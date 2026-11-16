@@ -7,19 +7,19 @@
    "rows": [
     {
      "name": "host CPU load (before/after)",
-     "value": "18/6 %",
+     "value": "41/5 %",
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "total transfer",
-     "value": "127.9 KiB",
+     "value": "187.5 KiB",
      "verdict": "PASS",
-     "note": "html 6.8K  css 7.7K  js 77.7K  font 28.6K  other 7.2K"
+     "note": "html 12.8K  css 7.6K  js 125.3K  font 28.6K  other 13.2K"
     },
     {
      "name": "requests",
-     "value": 7,
+     "value": 13,
      "verdict": "PASS",
      "note": "6 by load"
     },
@@ -31,13 +31,13 @@
     },
     {
      "name": "JS parsed",
-     "value": "207.9 KiB",
+     "value": "346.8 KiB",
      "verdict": "PASS",
-     "note": "1 files, 77.7K gz"
+     "note": "7 files, 125.3K gz"
     },
     {
      "name": "CSS",
-     "value": "7.7 KiB",
+     "value": "7.6 KiB",
      "verdict": "PASS",
      "note": "1 files"
     },
@@ -85,37 +85,37 @@
     },
     {
      "name": "WebGL live at bottom",
-     "value": 1,
+     "value": 0,
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "WebGL peak live",
-     "value": 1,
+     "value": 4,
      "verdict": "PASS",
-     "note": "1 contexts made in all"
+     "note": "5 contexts made in all"
     },
     {
      "name": "long tasks (WebGL off)",
      "value": 1,
      "verdict": "PASS",
-     "note": "runs 1, , max 100ms"
+     "note": "runs 1, , max 88ms"
     },
     {
      "name": "blocking time (WebGL off)",
-     "value": "50 ms",
+     "value": "38 ms",
      "verdict": "PASS",
-     "note": "runs 1,  ms; at load 50ms"
+     "note": "runs 1,  ms; at load 38ms"
     },
     {
      "name": "FCP (CPU, relative)",
-     "value": "172 ms",
+     "value": "164 ms",
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "LCP (CPU, relative)",
-     "value": "172 ms",
+     "value": "164 ms",
      "verdict": "PASS",
      "note": "pre"
     },
@@ -127,9 +127,9 @@
     },
     {
      "name": "  info: one load with WebGL on the CPU",
-     "value": "8676 ms",
+     "value": "10263 ms",
      "verdict": "INFO",
-     "note": "24 long tasks; SwiftShader runs shaders on the CPU, not a verdict, and shader compile on a real GPU is not measured"
+     "note": "43 long tasks; SwiftShader runs shaders on the CPU, not a verdict, and shader compile on a real GPU is not measured"
     },
     {
      "name": "modules loaded, never mounted",
@@ -147,7 +147,7 @@
      "name": "page height",
      "value": "7.7 screens",
      "verdict": "PASS",
-     "note": "DOM 512 nodes"
+     "note": "DOM 880 nodes"
     }
    ]
   },
@@ -156,19 +156,19 @@
    "rows": [
     {
      "name": "host CPU load (before/after)",
-     "value": "18/6 %",
+     "value": "41/5 %",
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "total transfer",
-     "value": "127.5 KiB",
+     "value": "187.1 KiB",
      "verdict": "PASS",
-     "note": "html 6.8K  css 7.7K  js 77.7K  font 28.6K  other 6.8K"
+     "note": "html 12.8K  css 7.6K  js 125.3K  font 28.6K  other 12.8K"
     },
     {
      "name": "requests",
-     "value": 6,
+     "value": 12,
      "verdict": "PASS",
      "note": "5 by load"
     },
@@ -180,13 +180,13 @@
     },
     {
      "name": "JS parsed",
-     "value": "207.9 KiB",
+     "value": "346.8 KiB",
      "verdict": "PASS",
-     "note": "1 files, 77.7K gz"
+     "note": "7 files, 125.3K gz"
     },
     {
      "name": "CSS",
-     "value": "7.7 KiB",
+     "value": "7.6 KiB",
      "verdict": "PASS",
      "note": "1 files"
     },
@@ -234,37 +234,37 @@
     },
     {
      "name": "WebGL live at bottom",
-     "value": 1,
+     "value": 0,
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "WebGL peak live",
-     "value": 1,
+     "value": 3,
      "verdict": "PASS",
-     "note": "1 contexts made in all"
+     "note": "5 contexts made in all"
     },
     {
      "name": "long tasks (WebGL off)",
-     "value": 1,
+     "value": 0,
      "verdict": "PASS",
-     "note": "runs 1, , max 51ms"
+     "note": "runs 1, , max 0ms"
     },
     {
      "name": "blocking time (WebGL off)",
-     "value": "1 ms",
+     "value": "0 ms",
      "verdict": "PASS",
-     "note": "runs 1,  ms; at load 1ms"
+     "note": "runs 1,  ms; at load 0ms"
     },
     {
      "name": "FCP (CPU, relative)",
-     "value": "72 ms",
+     "value": "68 ms",
      "verdict": "PASS",
      "note": ""
     },
     {
      "name": "LCP (CPU, relative)",
-     "value": "72 ms",
+     "value": "68 ms",
      "verdict": "PASS",
      "note": "pre"
     },
@@ -276,9 +276,9 @@
     },
     {
      "name": "  info: one load with WebGL on the CPU",
-     "value": "1801 ms",
+     "value": "4635 ms",
      "verdict": "INFO",
-     "note": "38 long tasks; SwiftShader runs shaders on the CPU, not a verdict, and shader compile on a real GPU is not measured"
+     "note": "59 long tasks; SwiftShader runs shaders on the CPU, not a verdict, and shader compile on a real GPU is not measured"
     },
     {
      "name": "modules loaded, never mounted",
@@ -296,7 +296,7 @@
      "name": "page height",
      "value": "12.2 screens",
      "verdict": "PASS",
-     "note": "DOM 512 nodes"
+     "note": "DOM 880 nodes"
     }
    ]
   }

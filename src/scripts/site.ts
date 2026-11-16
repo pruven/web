@@ -1,3 +1,4 @@
+import { initServiceEffects } from './service-effects';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate } from 'motion';
@@ -220,3 +221,5 @@ if (form) {
 }
 initVisuals();
 initGradientASCII();
+
+initServiceEffects();

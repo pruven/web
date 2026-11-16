@@ -167,7 +167,7 @@ test('copies the documented Bun installation commands', async ({ page }) => {
 });
 
 for (const width of [1440, 390]) {
-  test(`visuals animate and pause at ${width}px`, async ({ page }) => {
+  test(`hero animates and pauses at ${width}px`, async ({ page }) => {
     test.setTimeout(90_000); // Full-hero WebGL screenshots use Chromium's CPU renderer in CI.
     await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
     await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -177,8 +177,8 @@ for (const width of [1440, 390]) {
       'data-ascii-status',
       'ready',
     );
-    const scenes = page.locator('[data-visual-motion]');
-    await expect(scenes).toHaveCount(5);
+    const scenes = page.locator('[data-visual-motion=hero]');
+    await expect(scenes).toHaveCount(1);
     for (const scene of await scenes.all()) {
       await scene.evaluate((el) =>
         window.scrollTo({
@@ -187,6 +187,12 @@ for (const width of [1440, 390]) {
         }),
       );
       await expect(scene).toHaveAttribute('data-motion-state', 'playing');
+      if (await scene.locator('[data-service-effect]').count())
+        await expect(scene.locator('[data-service-effect]')).toHaveAttribute(
+          'data-effect-status',
+          'ready',
+          { timeout: 20_000 },
+        );
       const before = await scene.screenshot({ animations: 'allow' });
       await page.waitForTimeout(800);
       expect(
@@ -223,7 +229,7 @@ test('ASCII hero has a static fallback when WebGL is unavailable', async ({
   );
   await expect(page.locator('.gradient-ascii-fallback')).toBeVisible();
   await expect(page.locator('[data-dither]')).toHaveCount(0);
-  await expect(page.locator('[data-visual-motion]>svg')).toHaveCount(4);
+  await expect(page.locator('.service-effect>svg')).toHaveCount(4);
   await expect(page.locator('.footer-wordmark text')).toHaveText('pruven');
 });
 
@@ -290,4 +296,108 @@ test('ASCII responds to pointer input and recovers from context loss', async ({
   await expect(effect).toHaveAttribute('data-ascii-status', 'fallback');
   await expect(effect.locator('.gradient-ascii-fallback')).toBeVisible();
   await expect(page.locator('#hero-visual button')).toBeHidden();
+});
+
+for (const width of [1440, 768, 390]) {
+  test(`service effects render, move, and pause at ${width}px`, async ({
+    page,
+  }) => {
+    test.setTimeout(120_000);
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1024 });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    const errors: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+    const kinds = ['micro-slats', 'pattern-waves', 'ghost-fibers', 'crt-warp'];
+    const scenes = page.locator('.service-illustration');
+    await expect(scenes).toHaveCount(4);
+    // Isolate each animation so concurrent software shaders do not distort screenshot timing.
+    await scenes.evaluateAll((elements) =>
+      elements.forEach((element) =>
+        element.querySelector<HTMLButtonElement>('button')?.click(),
+      ),
+    );
+    for (const [i, kind] of kinds.entries()) {
+      const scene = scenes.nth(i);
+      await expect(scene.locator('[data-service-effect]')).toHaveAttribute(
+        'data-service-effect',
+        kind,
+      );
+      await scene.scrollIntoViewIfNeeded();
+      await scene.getByRole('button').click();
+      await expect(scene).toHaveAttribute('data-motion-state', 'playing');
+      if (await scene.locator('[data-service-effect]').count())
+        await expect(scene.locator('[data-service-effect]')).toHaveAttribute(
+          'data-effect-status',
+          'ready',
+          { timeout: 20_000 },
+        );
+      await expect(scene.locator('canvas')).toBeVisible();
+      await expect(scene.locator('.service-effect>svg')).toBeHidden();
+      await page.mouse.move(0, 0);
+      const clip = await scene.boundingBox();
+      if (!clip) throw new Error('Missing service visual bounds');
+      const capture = (path?: string) =>
+        page.screenshot({ clip, animations: 'allow', path });
+      const before = await capture();
+      await page.waitForTimeout(450);
+      expect((await capture()).equals(before)).toBe(false);
+      const pause = scene.getByRole('button');
+      await pause.click();
+      await expect(pause).toHaveAttribute('aria-pressed', 'true');
+      await page.mouse.move(0, 0);
+      await page.waitForTimeout(180);
+      const frozen = await capture(
+        `inspection/visuals/services-${width}-${kind}.png`,
+      );
+      await page.waitForTimeout(220);
+      expect((await capture()).equals(frozen)).toBe(true);
+    }
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const scene of await scenes.all()) {
+      await expect(scene).toHaveAttribute('data-motion-state', 'still');
+      await expect(scene.getByRole('button')).toBeHidden();
+    }
+    const last = scenes.last();
+    await expect(last.locator('[data-service-effect]')).toHaveAttribute(
+      'data-effect-status',
+      'ready',
+    );
+    const lastClip = await last.boundingBox();
+    if (!lastClip) throw new Error('Missing final service visual bounds');
+    const still = await page.screenshot({ clip: lastClip });
+    await page.waitForTimeout(250);
+    expect((await page.screenshot({ clip: lastClip })).equals(still)).toBe(
+      true,
+    );
+  });
+}
+
+test('service renderers retain their fallback without WebGL', async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+      value: () => null,
+    }),
+  );
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  await page.goto('/');
+  for (const scene of await page.locator('.service-illustration').all()) {
+    await scene.scrollIntoViewIfNeeded();
+    await expect(scene.locator('[data-service-effect]')).toHaveAttribute(
+      'data-effect-status',
+      'unavailable',
+    );
+    await expect(scene.locator('.service-effect>svg')).toBeVisible();
+    await expect(scene.getByRole('button')).toBeHidden();
+  }
+  expect(errors).toEqual([]);
 });
