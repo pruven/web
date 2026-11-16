@@ -2,7 +2,7 @@
 
 Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. Zeke is its only current product.
 
-This website is a standalone recreation of [the Onda reference](https://onda-template.modulify.website/), built with Astro, TypeScript, Tailwind CSS v4, GSAP ScrollTrigger, Motion, and Lucide. Native Astro components render all page content. No React, hydration islands, Modulify dependencies, remote runtime assets, or hosted APIs are required.
+This website is a standalone recreation of [the Onda reference](https://onda-template.modulify.website/), built with Astro, TypeScript, Tailwind CSS v4, GSAP ScrollTrigger, Motion, and Lucide. Native Astro components render all page content. The core pages require no React, hydration islands, Modulify dependencies or remote runtime assets. Project booking loads Cal.com’s official embed on demand.
 
 ## Run with Bun
 
@@ -74,3 +74,9 @@ Host Grotesk and DM Mono are licensed under SIL OFL 1.1. The matching Latin subs
 React Bits components are used within this website under the MIT + Commons Clause license; attribution and the full terms are in `public/licenses/react-bits.txt`. Their shader source is adapted to native DOM mounts, with OGL used for Micro Slats and Pattern Waves. No React runtime is installed.
 
 The layout follows the reference, with the user-supplied GradientASCII hero, Micro Slats, Pattern Waves, Ghost Fibers and CRT Warp service cards, and a solid footer wordmark. Every animated scene has a pause button, and the service renderers are capped at 30 fps and native pixel density. The single-product content and replacement artwork intentionally differ; animated frames cannot have an exact pixel identity. The reference's third-party editor badge is omitted. See `inspection/REPORT.md` for the measured comparison and validation results.
+
+## Project booking
+
+All “Start a project” links open the Cal.com popup for `https://cal.com/lossstheaven/15min`, following [Cal.com’s embed instructions](https://cal.com/help/embedding/embed-instructions). `src/scripts/booking.ts` loads the official `https://app.cal.com/embed/embed.js` only after a click and reuses it on subsequent clicks. The popup uses a light theme and Pruven’s blue accent. The normal booking link works without JavaScript, with modified clicks, or if loading the embed fails. The mobile menu closes before the popup opens. No API key is required.
+
+“Say hello” links in the footer, contact section and mobile menu use the same popup integration with `https://cal.com/lossstheaven/hello`, replacing the visible email links.

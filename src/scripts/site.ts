@@ -1,3 +1,4 @@
+import { initBooking } from './booking';
 import { initServiceEffects } from './service-effects';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -223,3 +224,5 @@ initVisuals();
 initGradientASCII();
 
 initServiceEffects();
+
+initBooking();

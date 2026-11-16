@@ -24,7 +24,7 @@ const links = ['Products', 'Services', 'Process', 'Studio'];
         ))}
       </ul>
     </nav>
-    <Button href="/contact" small class="header-cta">
+    <Button booking small class="header-cta">
       Start a project
     </Button>
     <button
@@ -55,9 +55,14 @@ const links = ['Products', 'Services', 'Process', 'Studio'];
         </ul>
       </nav>
       <div class="mobile-bottom">
-        <Button href="/contact">Start a project</Button>
-        <a class="mono" href="mailto:hello@pruven.studio">
-          hello@pruven.studio
+        <Button booking>Start a project</Button>
+        <a
+          class="mono"
+          href="https://cal.com/lossstheaven/hello"
+          data-booking-trigger="hello"
+          aria-haspopup="dialog"
+        >
+          Say hello
         </a>
       </div>
     </div>

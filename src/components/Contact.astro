@@ -1,7 +1,7 @@
 ---
 import SectionLabel from './SectionLabel.astro';
 import Heading from './Heading.astro';
-import { Mail, ArrowUpRight } from '@lucide/astro';
+import { CalendarDays, ArrowUpRight } from '@lucide/astro';
 interface Props {
   standalone?: boolean;
 }
@@ -24,9 +24,13 @@ const budgets = ['Under €25k', '€25k to €75k', '€75k to €150k', 'Over 
       </p>
       <ul class="contact-details">
         <li>
-          <a href="mailto:hello@pruven.studio">
-            <Mail size={20} />
-            <span>hello@pruven.studio</span>
+          <a
+            href="https://cal.com/lossstheaven/hello"
+            data-booking-trigger="hello"
+            aria-haspopup="dialog"
+          >
+            <CalendarDays size={20} />
+            <span>Say hello</span>
           </a>
         </li>
       </ul>

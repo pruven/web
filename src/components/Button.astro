@@ -1,14 +1,16 @@
 ---
 import { ArrowUpRight } from '@lucide/astro';
 interface Props {
-  href: string;
+  href?: string;
+  booking?: boolean;
   secondary?: boolean;
   small?: boolean;
   arrow?: boolean;
   class?: string;
 }
 const {
-  href,
+  href = '/contact',
+  booking = false,
   secondary = false,
   small = false,
   arrow = true,
@@ -17,7 +19,9 @@ const {
 ---
 
 <a
-  href={href}
+  href={booking ? 'https://cal.com/lossstheaven/15min' : href}
+  data-booking-trigger={booking || undefined}
+  aria-haspopup={booking ? 'dialog' : undefined}
   class:list={[
     'button',
     { 'button-secondary': secondary, 'button-small': small },
