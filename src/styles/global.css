@@ -770,173 +770,31 @@ textarea:focus-visible {
   color: #0a0b0db3;
   margin-top: 32px;
 }
-.contact-details {
-  display: flex;
-  flex-direction: column;
+.contact-booking {
+  align-self: center;
+  padding-block: 40px;
   border-top: 1px solid var(--line);
-  margin-top: 48px;
-}
-.contact-details li {
-  line-height: 28px;
   border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 18px;
-  letter-spacing: -0.01em;
 }
-.contact-details li:last-child {
-  padding-block: 20px;
-}
-.contact-details li > a {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-block: 20px;
-  width: 100%;
-  transition: color 0.3s;
-}
-.contact-details svg {
+.contact-booking > svg {
   color: var(--purple);
 }
-.contact-details a:hover {
-  color: var(--purple-dark);
+.contact-booking h3 {
+  margin-top: 24px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 500;
 }
-#contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  position: relative;
-}
-.form-pair {
-  display: grid;
-  gap: 40px;
-}
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.field input,
-.field textarea {
-  border: 0;
-  border-bottom: 1px solid #0a0b0d33;
-  border-radius: 0;
-  background: transparent;
-  width: 100%;
-  padding: 12px 0;
-  color: var(--ink);
-  font-size: 18px;
-  line-height: 28px;
-  outline: 0;
-  transition:
-    border-color 0.3s,
-    box-shadow 0.3s;
-}
-.field textarea {
-  resize: vertical;
-  min-height: 160px;
-}
-.field input::placeholder,
-.field textarea::placeholder {
-  color: #0a0b0d40;
-}
-.field input:focus,
-.field textarea:focus {
-  border-color: var(--ink);
-  box-shadow: 0 1px 0 var(--ink);
-}
-fieldset {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  min-width: 0;
-}
-.budget-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-.budget-options label {
-  cursor: pointer;
-  position: relative;
-}
-.budget-options input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-.budget-options span {
-  display: inline-flex;
-  align-items: center;
-  height: 40px;
-  border: 1px solid #0a0b0d26;
-  border-radius: 999px;
-  padding: 0 16px;
-  color: #0a0b0dcc;
-  font-size: 14px;
-  transition:
-    background 0.3s,
-    border 0.3s,
-    color 0.3s;
-}
-.budget-options label:hover span {
-  border-color: var(--ink);
-}
-.budget-options input:checked + span {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: white;
-}
-.budget-options input:focus-visible + span {
-  outline: 2px solid var(--purple);
-  outline-offset: 4px;
-}
-.honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.form-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 20px;
-}
-.form-bottom .button {
-  min-height: 56px;
-  padding-inline: 32px;
-  font-size: 16px;
-  line-height: 24px;
-}
-.button:disabled {
-  opacity: 0.7;
-  cursor: wait;
-}
-.form-bottom p {
-  font-size: 12px;
+.contact-booking > p {
+  margin-top: 20px;
+  max-width: 440px;
   color: var(--muted);
-  max-width: 240px;
-  line-height: 1.625;
+  line-height: 1.65;
 }
-.field-error {
-  font-size: 13px;
-  color: #b42318;
-}
-.field-error:empty,
-#form-status:empty {
-  display: none;
-}
-.field [aria-invalid='true'] {
-  border-color: #b42318;
-}
-#form-status {
-  font-size: 14px;
-  color: var(--muted);
+.contact-booking .contact-booking-note {
+  margin-top: 32px;
+  font-size: 10px;
 }
 .contact-page {
   padding-top: 64px;
@@ -1019,11 +877,6 @@ fieldset {
   }
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .form-bottom {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
   }
 }
 @media (min-width: 768px) {
@@ -1117,10 +970,6 @@ fieldset {
   .process-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 40px;
-  }
-  .form-pair {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
   }
   .site-footer > .wrap {
     padding-top: 80px;
@@ -1236,7 +1085,7 @@ fieldset {
   .contact-copy {
     grid-column: span 5;
   }
-  #contact-form {
+  .contact-booking {
     grid-column: 7 / span 6;
   }
   .footer-grid {
@@ -1296,7 +1145,7 @@ fieldset {
   opacity: 0.55;
 }
 
-/* The studio currently has one product. Keep the reference grid, with a real CLI view. */
+/* Product features share the reference grid and show each tool in context. */
 .zeke-product {
   display: grid;
   gap: 48px;
@@ -1674,4 +1523,123 @@ fieldset {
 }
 .hero-ascii:has([data-ascii-status='fallback']) .motion-toggle {
   display: none;
+}
+
+.rtboard-product {
+  padding-top: 80px;
+  border-top: 1px solid var(--line);
+}
+.rtboard-preview {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #f8fafc;
+  overflow: hidden;
+}
+.rtboard-preview-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+.rtboard-board-name {
+  color: var(--muted);
+  font-size: 12px;
+}
+.rtboard-preview-header > .mono {
+  font-size: 11px;
+}
+.rtboard-preview-canvas {
+  height: 380px;
+  position: relative;
+  background-image: radial-gradient(#c4cedd 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.rtboard-note {
+  position: absolute;
+  top: 44px;
+  left: 7%;
+  width: 43%;
+  padding: 20px;
+  background: #f8eebc;
+  color: #4a412b;
+  box-shadow: 0 8px 20px #29374f0a;
+}
+.rtboard-note .mono {
+  font-size: 9px;
+}
+.rtboard-note p {
+  margin-top: 12px;
+  font-size: clamp(14px, 1.7vw, 22px);
+  line-height: 1.4;
+}
+.rtboard-media {
+  position: absolute;
+  top: 155px;
+  right: 7%;
+  width: 36%;
+  height: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #dceaff;
+  background: #152b51;
+  font-size: 12px;
+}
+.rtboard-connection {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 85%;
+  pointer-events: none;
+}
+.rtboard-tools {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  padding: 5px;
+  gap: 3px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px #152b5110;
+}
+.rtboard-tools span {
+  padding: 8px;
+  color: #667185;
+}
+.rtboard-tools span:first-child {
+  color: #315efb;
+  background: #eef3ff;
+  border-radius: 4px;
+}
+.rtboard-zoom {
+  position: absolute;
+  bottom: 78px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 9px;
+  color: var(--muted);
+}
+@media (max-width: 639px) {
+  .rtboard-preview-canvas {
+    height: 320px;
+  }
+  .rtboard-note {
+    padding: 14px;
+  }
+  .rtboard-media {
+    top: 145px;
+    height: 95px;
+  }
+  .rtboard-tools span {
+    padding: 7px;
+  }
 }

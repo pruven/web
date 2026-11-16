@@ -38,3 +38,9 @@ Final validation:
 - Prettier check of all changed application code and tests: passes.
 - `git diff --check`: passes.
 - Final skill performance audit at 1440 and 390 px: **0 failures, 0 warnings**. About 187 KiB transferred, zero broken requests, layout shift 0.000, at most four live WebGL contexts on desktop (three on mobile), and zero retained contexts at the bottom. `performance.json` contains this run. This single-run local audit separates fallback timing from CPU-emulated WebGL cost and does not measure real-GPU frame rate.
+
+## rtboard product addition
+
+rtboard is now the second product alongside Zeke. Its description and feature list were checked against `https://github.com/pruven/rtboard`; the live app is `https://rtboard.pruven.top/`. The native canvas illustration is a feature preview, not a screenshot or a functioning editor. Product links, studio count, hero copy, contact copy, footer and SEO description now include both products.
+
+Production build passes with zero diagnostics. Five targeted Playwright checks pass: layouts and local assets at 1440, 768 and 390 px, product presentation without JavaScript, and Zeke installation clipboard behavior. The responsive checks assert the rtboard app and repository links. Captures are `rtboard-1440.png`, `rtboard-768.png`, and `rtboard-390.png`; desktop and mobile were visually reviewed.

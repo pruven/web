@@ -4,6 +4,7 @@ import Heading from './Heading.astro';
 import Tags from './Tags.astro';
 import Button from './Button.astro';
 import { Copy, ArrowUpRight } from '@lucide/astro';
+import RTBoardProduct from './RTBoardProduct.astro';
 import { product } from '../data/product';
 ---
 
@@ -11,12 +12,12 @@ import { product } from '../data/product';
   <div class="wrap section-pad">
     <div class="section-head work-head">
       <div class="head-title">
-        <SectionLabel number="03" text="Our product" />
+        <SectionLabel number="03" text="Our products" />
         <Heading lines={['Small tools.', 'Less friction.']} />
       </div>
       <p class="section-description reveal">
-        Zeke is our first and currently only product. It handles the environment
-        file setup that comes with a new Git worktree.
+        Our experiments become tools you can use. Zeke handles environment files
+        for Git worktrees. rtboard gives your ideas an infinite canvas.
       </p>
     </div>
     <article class="zeke-product" aria-labelledby="zeke-title">
@@ -87,5 +88,6 @@ import { product } from '../data/product';
         </a>
       </div>
     </article>
+    <RTBoardProduct />
   </div>
 </section>

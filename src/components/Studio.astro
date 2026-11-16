@@ -1,7 +1,7 @@
 ---
 import SectionLabel from './SectionLabel.astro';
 const facts = [
-  ['Our product', '1', 'Zeke is our first and currently only product.'],
+  ['Our products', '2', 'Zeke and rtboard, built by Pruven.'],
   ['Our approach', 'R&D', 'Exploring ideas through experimental software.'],
   [
     'Client work',
@@ -10,8 +10,8 @@ const facts = [
   ],
   [
     'Available now',
-    'Zeke',
-    'Read the guide and get started at zeke.pruven.top.',
+    'Try them',
+    'Explore Zeke for worktrees and rtboard for ideas.',
   ],
 ];
 ---
@@ -24,7 +24,8 @@ const facts = [
         Pruven is an experimental software company. We build our own products to
         explore ideas and build custom software for clients.{' '}
         <span>
-          Our first product is Zeke. Our next experiment starts with an idea.
+          From Git worktrees with Zeke to an infinite canvas with rtboard, we
+          build tools around ideas worth exploring.
         </span>
       </p>
     </div>
@@ -34,7 +35,7 @@ const facts = [
           <div class="reveal">
             <p class="mono">{label}</p>
             <p class="stat-number">
-              {value === '1' ? <span data-count="1">1</span> : value}
+              {value === '2' ? <span data-count="2">2</span> : value}
             </p>
             <p class="stat-description">{text}</p>
           </div>

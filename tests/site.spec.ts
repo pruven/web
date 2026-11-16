@@ -32,13 +32,29 @@ for (const width of [1440, 768, 390]) {
       ),
     ).toBe(true);
     await page.locator('#work').scrollIntoViewIfNeeded();
-    await expect(page.locator('.zeke-product')).toHaveCount(1);
+    await expect(
+      page.locator('.zeke-product:not(.rtboard-product)'),
+    ).toHaveCount(1);
     await expect(
       page.getByRole('heading', { name: 'Zeke', exact: true }),
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'View Zeke', exact: true }),
     ).toHaveAttribute('href', 'https://zeke.pruven.top/');
+    await expect(page.locator('.rtboard-product')).toHaveCount(1);
+    await page.locator('.rtboard-product').scrollIntoViewIfNeeded();
+    await expect(
+      page.getByRole('heading', { name: 'rtboard', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Open rtboard', exact: true }),
+    ).toHaveAttribute('href', 'https://rtboard.pruven.top/');
+    await expect(
+      page.getByRole('link', { name: 'Source on GitHub', exact: true }),
+    ).toHaveAttribute('href', 'https://github.com/pruven/rtboard');
+    await page
+      .locator('.rtboard-product')
+      .screenshot({ path: `inspection/visuals/rtboard-${width}.png` });
     await expect(page.locator('#testimonial, #clients')).toHaveCount(0);
     await page.evaluate(() =>
       document.querySelector('footer')?.scrollIntoView(),
@@ -70,41 +86,23 @@ test('mobile navigation supports keyboard, escape, and anchor close', async ({
   await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden');
 });
 
-test('form validates and supports real endpoint success and failure', async ({
+test('contact offers booking links without a message form', async ({
   page,
 }) => {
   await page.goto('/contact');
-  const form = page.locator('#contact-form');
-  await form.getByRole('button', { name: 'Send message' }).click();
-  await expect(page.locator('#contact-name')).toHaveAttribute(
-    'aria-invalid',
-    'true',
+  const contact = page.locator('#contact');
+  await expect(contact.getByRole('heading', { level: 1 })).toHaveAccessibleName(
+    'Let’s build what’s next.',
   );
-  await expect(page.locator('#contact-name')).toBeFocused();
-  await page.getByLabel('Your name').fill('Alex Example');
-  await page.getByLabel('Work email').fill('alex@example.com');
-  await page
-    .getByLabel('About your project')
-    .fill('An accessible booking application.');
-  await page.getByLabel('€25k to €75k', { exact: true }).check();
-  await page.route('**/test-contact', (route) =>
-    route.fulfill({ status: 500, body: '{}' }),
-  );
-  await form.evaluate((el) =>
-    el.setAttribute('data-endpoint', '/test-contact'),
-  );
-  await form.getByRole('button', { name: 'Send message' }).click();
-  await expect(page.getByRole('status')).toContainText('could not be sent');
-  await page.unroute('**/test-contact');
-  let payload: Record<string, string> = {};
-  await page.route('**/test-contact', async (route) => {
-    payload = route.request().postDataJSON();
-    await route.fulfill({ status: 200, body: '{}' });
-  });
-  await form.getByRole('button', { name: 'Send message' }).click();
-  await expect(page.getByRole('status')).toContainText('has been sent');
-  expect(payload.budget).toBe('€25k to €75k');
-  expect(payload.email).toBe('alex@example.com');
+  await expect(
+    contact.getByRole('link', { name: 'Start a project' }),
+  ).toHaveAttribute('href', 'https://cal.com/lossstheaven/15min');
+  await expect(
+    contact.getByRole('link', { name: 'Say hello' }),
+  ).toHaveAttribute('href', 'https://cal.com/lossstheaven/hello');
+  await expect(
+    page.locator('form,input[type="email"],a[href^="mailto:"]'),
+  ).toHaveCount(0);
 });
 
 test('reduced motion keeps all content visible and freezes visuals', async ({
@@ -140,7 +138,7 @@ test('product details remain visible without JavaScript', async ({
   await expect(page.locator('.terminal-content')).toContainText(
     'bun add --dev @pruven/zeke',
   );
-  await expect(page.locator('[data-count="1"]')).toHaveText('1');
+  await expect(page.locator('[data-count="2"]')).toHaveText('2');
   await context.close();
 });
 

@@ -1,4 +1,5 @@
 ---
+import { products } from '../data/product';
 import Logo from './Logo.astro';
 import { ArrowUp } from '@lucide/astro';
 ---
@@ -34,11 +35,13 @@ import { ArrowUp } from '@lucide/astro';
         </ul>
       </nav>
       <div>
-        <p class="mono">Product</p>
+        <p class="mono">Products</p>
         <ul>
-          <li>
-            <a href="https://zeke.pruven.top/">Zeke</a>
-          </li>
+          {products.map((product) => (
+            <li>
+              <a href={product.url}>{product.name}</a>
+            </li>
+          ))}
         </ul>
       </div>
       <div>

@@ -1,6 +1,6 @@
 # Pruven Studio — Astro recreation
 
-Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. Zeke is its only current product.
+Pruven is an experimental software company that builds its own products and takes on freelance software projects for clients. Its current products are Zeke and rtboard.
 
 This website is a standalone recreation of [the Onda reference](https://onda-template.modulify.website/), built with Astro, TypeScript, Tailwind CSS v4, GSAP ScrollTrigger, Motion, and Lucide. Native Astro components render all page content. The core pages require no React, hydration islands, Modulify dependencies or remote runtime assets. Project booking loads Cal.com’s official embed on demand.
 
@@ -27,11 +27,9 @@ The project uses Astro's supported Node runtime (Node 22.12+; Node 24+ recommend
 
 Copy `.env.example` to `.env` and set `SITE_URL` to the deployment's public origin before building. This controls canonical URLs, Open Graph URLs, robots.txt, and sitemap.xml. Deploy `dist/` to any static host. Both `/` and `/contact/` are generated.
 
-`PUBLIC_CONTACT_ENDPOINT` optionally connects the form to an HTTP endpoint accepting a JSON POST with `name`, `email`, `company`, `budget`, and `message`. Return an HTTP 2xx response only after accepting the message. The UI handles pending, success, validation, and failure states. The endpoint must implement its own validation and rate limiting; never put secrets in a `PUBLIC_` variable.
+Contact uses the Cal.com booking popups described below. No contact backend or messaging configuration is required.
 
-Without an endpoint, submitting the validated form opens an email draft in the visitor's mail app. The status explicitly explains that the visitor must send the draft; the site never reports delivery without an endpoint response. This makes the static site usable locally without pretending that a backend exists.
-
-Pruven currently has one product: [Zeke](https://zeke.pruven.top/), a Git hook that copies missing, ignored environment files into new worktrees. The template’s fictional clients, projects, statistics, testimonial, founding date, address, and phone number have been removed. The product section shows a native HTML terminal with documented Bun installation commands and a copy button. Confirm the contact email before publishing.
+Pruven has two products: [Zeke](https://zeke.pruven.top/), a Git hook that copies missing, ignored environment files into new worktrees, and [rtboard](https://rtboard.pruven.top/), an infinite canvas for notes, drawings, links and playable media embeds. rtboard stores boards locally and supports shareable HTML and editable board exports; its source is available on [GitHub](https://github.com/pruven/rtboard). The template’s fictional clients, projects, statistics, testimonial, founding date, address, and phone number have been removed. The product section shows a native HTML terminal with documented Bun installation commands and a copy button.
 
 ## Structure
 
@@ -47,11 +45,11 @@ Pruven currently has one product: [Zeke](https://zeke.pruven.top/), a Git hook t
 - `src/scripts/service-effects.ts`: lazily loads the four service renderers, cleans up GPU resources and remounts stills when reduced motion changes.
 - `src/vendor/scene-scheduler.ts`: shared renderer scheduling, pause control and frame-rate cap.
 - `src/scripts/visuals.ts`: visibility, pause/resume, and reduced-motion handling for native CSS animations.
-- `src/scripts/site.ts`: GSAP reveals and counts, Motion mobile navigation, accessible menu state, and form behavior.
-- `src/data/product.ts`: the current product, documentation URL, description, and copyable installation commands.
+- `src/scripts/site.ts`: GSAP reveals and counts, Motion mobile navigation, accessible menu state, and booking behavior.
+- `src/data/product.ts`: both products, their URLs and descriptions, and Zeke’s copyable installation commands.
 - `public/fonts/`: self-hosted, Latin-subset WOFF2 fonts.
 - `public/licenses/`: font licenses and provenance.
-- `tests/`: Playwright checks for breakpoints, navigation, Zeke links and clipboard behavior, form states, asset independence, and reduced motion.
+- `tests/`: Playwright checks for breakpoints, navigation, Zeke links and clipboard behavior, Cal.com booking, asset independence, and reduced motion.
 - `inspection/`: reference and local screenshots, measurements, and visual review notes.
 
 ## Visual verification
@@ -73,10 +71,10 @@ Host Grotesk and DM Mono are licensed under SIL OFL 1.1. The matching Latin subs
 
 React Bits components are used within this website under the MIT + Commons Clause license; attribution and the full terms are in `public/licenses/react-bits.txt`. Their shader source is adapted to native DOM mounts, with OGL used for Micro Slats and Pattern Waves. No React runtime is installed.
 
-The layout follows the reference, with the user-supplied GradientASCII hero, Micro Slats, Pattern Waves, Ghost Fibers and CRT Warp service cards, and a solid footer wordmark. Every animated scene has a pause button, and the service renderers are capped at 30 fps and native pixel density. The single-product content and replacement artwork intentionally differ; animated frames cannot have an exact pixel identity. The reference's third-party editor badge is omitted. See `inspection/REPORT.md` for the measured comparison and validation results.
+The layout follows the reference, with the user-supplied GradientASCII hero, Micro Slats, Pattern Waves, Ghost Fibers and CRT Warp service cards, and a solid footer wordmark. Every animated scene has a pause button, and the service renderers are capped at 30 fps and native pixel density. The product content and replacement artwork intentionally differ; animated frames cannot have an exact pixel identity. The reference's third-party editor badge is omitted. See `inspection/REPORT.md` for the measured comparison and validation results.
 
 ## Project booking
 
 All “Start a project” links open the Cal.com popup for `https://cal.com/lossstheaven/15min`, following [Cal.com’s embed instructions](https://cal.com/help/embedding/embed-instructions). `src/scripts/booking.ts` loads the official `https://app.cal.com/embed/embed.js` only after a click and reuses it on subsequent clicks. The popup uses a light theme and Pruven’s blue accent. The normal booking link works without JavaScript, with modified clicks, or if loading the embed fails. The mobile menu closes before the popup opens. No API key is required.
 
-“Say hello” links in the footer, contact section and mobile menu use the same popup integration with `https://cal.com/lossstheaven/hello`, replacing the visible email links.
+“Say hello” links in the footer, contact section and mobile menu use the same popup integration with `https://cal.com/lossstheaven/hello`.

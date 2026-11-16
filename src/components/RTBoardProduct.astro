@@ -1,0 +1,99 @@
+---
+import { rtboard } from '../data/product';
+import Button from './Button.astro';
+import Tags from './Tags.astro';
+import {
+  ArrowUpRight,
+  MousePointer2,
+  Hand,
+  Type,
+  Pencil,
+  Square,
+  StickyNote,
+  Play,
+  Plus,
+  Minus,
+} from '@lucide/astro';
+---
+
+<article class="zeke-product rtboard-product" aria-labelledby="rtboard-title">
+  <div
+    class="rtboard-preview"
+    role="img"
+    aria-label="rtboard canvas preview with a note, drawing, media tile and drawing toolbar"
+  >
+    <div class="rtboard-preview-header">
+      <span>
+        rtboard <span class="rtboard-board-name">/ Untitled board</span>
+      </span>
+      <span class="mono">File</span>
+    </div>
+    <div class="rtboard-preview-canvas">
+      <div class="rtboard-note">
+        <span class="mono">A new idea</span>
+        <p>
+          Collect the things
+          <br />
+          that connect.
+        </p>
+      </div>
+      <div class="rtboard-media">
+        <Play size={28} />
+        <span>Links that play.</span>
+      </div>
+      <svg
+        class="rtboard-connection"
+        viewBox="0 0 500 300"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M165 105C310 65 210 220 340 175M330 166L342 175L328 182"
+          stroke="#315efb"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <ellipse
+          cx="125"
+          cy="218"
+          rx="45"
+          ry="25"
+          stroke="#91a8d1"
+          stroke-width="1.5"
+        />
+      </svg>
+      <div class="rtboard-tools" aria-hidden="true">
+        {[MousePointer2, Hand, Type, Pencil, Square, StickyNote].map((Icon) => (
+          <span>
+            <Icon size={17} />
+          </span>
+        ))}
+      </div>
+      <div class="rtboard-zoom mono" aria-hidden="true">
+        <Minus size={12} />
+        100%
+        <Plus size={12} />
+      </div>
+    </div>
+  </div>
+  <div class="zeke-copy">
+    <p class="mono">Pruven / Creative tools</p>
+    <h3 id="rtboard-title">{rtboard.name}</h3>
+    <p class="zeke-tagline">
+      Space for
+      <br />
+      every idea.
+    </p>
+    <p class="zeke-description">{rtboard.description}</p>
+    <Tags tags={rtboard.tags} />
+    <ul class="zeke-features">
+      {rtboard.features.map((feature) => (
+        <li>{feature}</li>
+      ))}
+    </ul>
+    <Button href={rtboard.url}>Open rtboard</Button>
+    <a class="zeke-docs mono" href={rtboard.repository}>
+      Source on GitHub <ArrowUpRight size={14} />
+    </a>
+  </div>
+</article>
